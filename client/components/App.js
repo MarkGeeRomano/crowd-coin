@@ -4,6 +4,7 @@ import { BrowserRouter, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
+import factory from '../ethereum/factory';
 
 import Home from './Home';
 
@@ -12,6 +13,12 @@ class App extends Component {
         super();
     };
 
+    async componentDidMount() {
+        const campaigns = await factory.methods.getDeployedCampaigns().call();
+        this.props.setContracts(campaigns)
+    };
+
+
     render() {
         return (
             <div>
@@ -19,7 +26,7 @@ class App extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a href='/info'>info</a>
                 <Switch>
-                    <Route exact path="/" render={() => <Home {...this.props}/> } />
+                    <Route exact path="/" render={() => <Home {...this.props} />} />
                     <Route exact path="/info" render={() => <h1>v kawaii world ;)</h1>} />
                 </Switch>
             </div>
