@@ -1,6 +1,6 @@
-export function setContracts(load) {
+export function setCampaigns(load) {
     return {
-        type: 'SET_CONTRACTS',
+        type: 'SET_CAMPAIGNS',
         load
     };
 };

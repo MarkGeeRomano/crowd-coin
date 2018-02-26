@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import contracts from './contracts';
+import campaigns from './campaigns';
 
 const rootReducer = combineReducers({
-    contracts
+    campaigns
 });
 
 export default rootReducer;

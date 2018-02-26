@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect, Link, BrowserRouter, withRouter  } from 'react-router-dom';
+import { Route, Switch, Redirect, Link, BrowserRouter, withRouter, Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
@@ -23,20 +23,26 @@ class App extends Component {
     render() {
         return (
             <Container>
-                <Header/>
+                <Header />
                 <Switch>
                     <Route
                         exact
                         path="/"
-                        render={() => <Home {...this.props}/>}
+                        render={() => <Home {...this.props} />}
                     />
                     <Route
                         path="/new-campaign"
-                        render={(history) => <NewCampaign {...{...this.props, ...history, factory, web3}}/>}
+                        render={(history) => <NewCampaign {...{ ...this.props, ...history, factory, web3 }} />}
                     />
-                    <Route path='/campaigns/:id' render={({match : { params }}) => <Campaign {...{...this.props, ...params, web3}}/>}>
-                        <Route path='/campaigns/:id/test' render={() => <p>hi</p>}/>
-                    </Route>
+                    <Route
+                        exact
+                        path="/campaigns/:id"
+                        render={({ match: { params } }) => <Campaign {...{ ...this.props, ...params, web3 }} />}
+                    />
+                    <Route
+                        path="/campaigns/:id/test"
+                        render={({ match: { params } }) => <p>{params.id}</p>}
+                    />
                 </Switch>
             </Container>
         );
