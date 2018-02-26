@@ -2,9 +2,10 @@ import { createStore, compose, applyMiddleware} from 'redux';
 import rootReducer from './reducers/index';
 import thunk from 'redux-thunk';
 
-const defaultState = { contracts: [] };
+const defaultState = { campaigns: []};
 
 const enhancers = compose(
+    applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f,
 );
 
