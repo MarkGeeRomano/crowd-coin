@@ -12,6 +12,8 @@ import Home from './Home';
 import Header from './Header';
 import Campaign from './Campaign';
 import NewCampaign from './NewCampaign';
+import Requests from './Requests';
+import NewRequest from './NewRequest';
 
 class App extends Component {
 
@@ -32,7 +34,7 @@ class App extends Component {
                     />
                     <Route
                         path="/new-campaign"
-                        render={(history) => <NewCampaign {...{ ...this.props, ...history, factory, web3 }} />}
+                        render={(history) => <NewCampaign {...{ ...this.props, factory, web3 }} />}
                     />
                     <Route
                         exact
@@ -40,8 +42,13 @@ class App extends Component {
                         render={({ match: { params } }) => <Campaign {...{ ...this.props, ...params, web3 }} />}
                     />
                     <Route
-                        path="/campaigns/:id/test"
-                        render={({ match: { params } }) => <p>{params.id}</p>}
+                        exact
+                        path="/campaigns/:id/requests"
+                        render={({ match: { params } }) => <Requests {...{ ...this.props, ...params, web3 }} />}
+                    />
+                    <Route
+                        path="/campaigns/:id/requests/new"
+                        render={({ match: { params } }) => <NewRequest {...{ ...this.props, ...params, web3 }} />}
                     />
                 </Switch>
             </Container>
