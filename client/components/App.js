@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
 
 import factory from '../../ethereum/factory';
-import web3 from '../ethereum/web3';
+import web3 from '../../ethereum/web3';
 
 import { Container } from 'semantic-ui-react';
 import Home from './Home';
