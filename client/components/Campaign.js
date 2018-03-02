@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import campaignGetter from '../ethereum/Campaign';
-import web3 from '../ethereum/web3';
+import campaignGetter from '../../ethereum/Campaign';
+import web3 from '../../ethereum/web3';
 
 import ContributeForm from './ContributeForm';
 

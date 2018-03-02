@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Message } from 'semantic-ui-react';
 
-import campaignGetter from '../ethereum/Campaign';
+import campaignGetter from '../../ethereum/Campaign';
 
 class NewRequest extends Component {
     state = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Table, Container } from 'semantic-ui-react';
 
-import campaignGetter from '../ethereum/Campaign';
+import campaignGetter from '../../ethereum/Campaign';
 
 import RequestRow from './RequestRow';
 
