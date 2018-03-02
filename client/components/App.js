@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
 
-import factory from '../ethereum/factory';
+import factory from '../../ethereum/factory';
 import web3 from '../ethereum/web3';
 
 import { Container } from 'semantic-ui-react';
@@ -14,6 +14,8 @@ import Campaign from './Campaign';
 import NewCampaign from './NewCampaign';
 import Requests from './Requests';
 import NewRequest from './NewRequest';
+
+
 
 class App extends Component {
 

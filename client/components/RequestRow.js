@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 
+import ApproveFinalizeBtn from './ApproveFinalizeBtn';
+
 class RequestRow extends Component {
-
-    state = {
-        isApprover: true,
-        loading: false
-    };
-
-    async componentDidMount() {
-        const { kampaign, web3 } = this.props;
-        const accounts = await web3.eth.getAccounts();
-        const isApprover = await kampaign.methods.approvers(accounts[0]).call();
-        console.log(isApprover)
-        this.setState({ ...this.state, isApprover });
-    };
 
     async onApprove() {
         const { kampaign, web3 } = this.props;
@@ -28,7 +17,22 @@ class RequestRow extends Component {
         } catch (e) {
 
         };
-        this.setState({ loading: false });
+        this.setState({ ...state, loading: false });
+    };
+
+    async onFinalize() {
+        const { kampaign, web3 } = this.props;
+        this.setState({ ...state, loading: true });
+
+        const accounts = web3.eth.getAccounts();
+        let error;
+        try {
+            await kampaign.methods.finalizeRequest(this.props.id)
+                .send({ from: accounts[0] });
+        } catch (e) {
+
+        };
+        this.setState({ ...state, loading: false });
     };
 
     render() {
@@ -39,30 +43,30 @@ class RequestRow extends Component {
             recipient,
             approvalCount,
         } = this.props.request;
-        const { approvers, web3, id } = this.props;
+        const {
+            approvers,
+            web3,
+            id,
+            updateRequestData,
+            kampaign,
+            request
+        } = this.props;
 
         return (
             <Row>
                 <Cell>{this.props.id}</Cell>
                 <Cell>{description}</Cell>
-                <Cell>{this.props.web3.utils.fromWei(value, 'ether')}</Cell>
-                <Cell>{recipient}</Cell>
-                <Cell>{approvalCount + '/' + this.props.approvers}</Cell>
-                <Cell>
-                    {this.state.isApprover 
-                    ?
-                    <Button
-                        color='green'
-                        basic
-                        loading={this.state.loading}
-                        onClick={this.onApprove.bind(this)}
-                    >
-                        Approve
-                    </Button>
-                    :
-                    <Button color='red'>Not an approver</Button>}
-                </Cell>
-                <Cell></Cell>
+                <Cell textAlign='center'>{this.props.web3.utils.fromWei(value, 'ether')}</Cell>
+                <Cell textAlign='center'>{recipient}</Cell>
+                <Cell textAlign='center'>{approvalCount + '/' + this.props.approvers}</Cell>
+                <ApproveFinalizeBtn
+                    onApprove={this.onApprove.bind(this)}
+                    updateRequestData={updateRequestData}
+                    kampaign={kampaign}
+                    web3={web3}
+                    id={id}
+                    request={request}
+                />
             </Row>
         )
     };

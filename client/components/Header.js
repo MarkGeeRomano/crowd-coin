@@ -2,21 +2,22 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { withRouter, Link } from 'react-router-dom';
 
+const fontStyle = { fontWeight: 'bold', fontSize: '20px' };
 const Header = ({ history }) => {
-    const borderFix = { borderLeft: '1px solid rgba(34,36,38,.15)' };
     return (
-        <Menu style={{ marginTop: '10px' }}>
-            <Link to='/'>
-                <Menu.Item>
-                    Crowd Coin
-                </Menu.Item>
-            </Link>
-            <Menu.Menu position='right'>
+        <Menu secondary>
+            <Menu.Menu position='left'>
                 <Link to='/'>
-                    <Menu.Item style={borderFix}>Campaigns</Menu.Item>
+                    <Menu.Item style={fontStyle}>
+                        Crowd Coin
+                    </Menu.Item>
                 </Link>
+            </Menu.Menu>
+            <Menu.Menu position='right'>
                 <Link to="/new-campaign" >
-                    <Menu.Item>+</Menu.Item>
+                    <Menu.Item style={fontStyle}>
+                        Add campaign +
+                    </Menu.Item>
                 </Link>
             </Menu.Menu>
         </Menu>

@@ -88,4 +88,10 @@ contract Campaign {
     function getRequestsCount() public view returns (uint) {
         return requests.length;
     }
+
+    function approved(uint index) public view returns (bool) {
+        Request storage request = requests[index];
+        bool status = request.approvals[msg.sender];
+        return status;
+    }
 }
