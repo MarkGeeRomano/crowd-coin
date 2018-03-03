@@ -5,7 +5,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client',
-    './client/boilerPlate'
+    './client/crowdCoin'
   ],
   output: {
     path: path.join(__dirname, 'dist'),

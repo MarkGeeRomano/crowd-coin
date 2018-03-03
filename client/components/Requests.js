@@ -21,7 +21,6 @@ class Requests extends Component {
 
     async updateRequestData() {
         const kampaign = await campaignGetter(this.props.id);
-
         const approvers = await kampaign.methods.approversCount().call();
         const requests = [];
         const requestCount = await kampaign.methods.getRequestsCount().call();
@@ -51,7 +50,6 @@ class Requests extends Component {
 
     render() {
         const { Header, Row, HeaderCell, Body } = Table;
-        console.log(this.props.id)
         return (
             <div>
                 <h3>This Campaign's Requests</h3>
