@@ -5,9 +5,11 @@ import styles from '../styles/header.css'
 
 const Header = () => {
     return (
-        <div className={styles.container}>
-            <h1>CrowdCoin</h1>
-        </div>
+        <Link to='/'>
+            <div className={styles.container}>
+                <h1>CrowdCoin</h1>
+            </div>
+        </Link>
     );
 };
 

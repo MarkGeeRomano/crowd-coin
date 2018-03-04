@@ -7,8 +7,7 @@ import styles from '../styles/newCampaign.css'
 class NewCampaign extends Component {
     state = {
         minimumContribution: '',
-        errMsg: '',
-        loading: false
+        errMsg: ''
     };
 
     render() {

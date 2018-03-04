@@ -3,13 +3,13 @@ import { Route, Switch, Redirect, Link, BrowserRouter, withRouter, Router } from
 
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
-
+import campaignGetter from '../../ethereum/Campaign';
 // import Home from './Home';
 // import Header from './Header';
 // import Campaign from './Campaign';
-import NewCampaign from './NewCampaign';
+// import NewCampaign from './NewCampaign';
 // import Requests from './Requests';
-import NewRequest from './NewRequest';
+// import NewRequest from './NewRequest';
 
 import Home from './Home2'
 import Header from './Header2'
@@ -24,7 +24,15 @@ class App extends Component {
     };
 
     async getCampaigns() {
-        const campaigns = await factory.methods.getDeployedCampaigns().call();
+        const addresses = await factory.methods.getDeployedCampaigns().call();
+        const campaigns = [];
+        for(let i = 0; i < addresses.length; i++) {
+            const campaign = campaignGetter(addresses[i]);
+            const campaignDetails = await campaign.methods.getSummary().call();
+            campaignDetails['7'] = addresses[i]
+            campaigns.push(campaignDetails);
+        };
+        window.campaigns = campaigns
         this.setState({ campaigns });
     };
 

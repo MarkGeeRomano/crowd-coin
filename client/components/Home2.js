@@ -6,12 +6,13 @@ import NewCampaign from './NewCampaign2';
 import styles from '../styles/home.css';
 
 const Home = ({ campaigns }) => {
+    console.log(campaigns)
     const cards = campaigns.map((campaign => {
         return (
             <div key={campaign} className={styles.card}>
-                <div>Name of Campaign: <span>This is a campaign name</span></div>
-                <div>Address: <span>{campaign}</span></div>
-                <div>Available funds(eth): <span>{Math.floor(Math.random() * 100)}</span></div>
+                <div>Name of Campaign: <span>{campaign[5]}</span></div>
+                <div>Address: <span>{campaign[7]}</span></div>
+                <div>Available funds(eth): <span>{campaign[1]}</span></div>
                 <Link to={'/campaigns/' + campaign}>View Campaign</Link>
             </div>
         )
@@ -19,16 +20,16 @@ const Home = ({ campaigns }) => {
 
     return (
         <div>
-        <div id="hi" className={styles.container}>
-            <div className={styles.campaignContainer}>
-                <h3>Active Campaigns</h3>
-                <div className={styles.cardsContainer}>
-                    {cards}
+            <div className={styles.container}>
+                <div className={styles.campaignContainer}>
+                    <h3>Active Campaigns</h3>
+                    <div className={styles.cardsContainer}>
+                        {cards}
+                    </div>
                 </div>
+                <div className={styles.inbetween}></div>
+                <NewCampaign />
             </div>
-            <div className={styles.inbetween}></div>
-            <NewCampaign />
-        </div>
         </div>
     );
 };
