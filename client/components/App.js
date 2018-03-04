@@ -4,13 +4,16 @@ import { Route, Switch, Redirect, Link, BrowserRouter, withRouter, Router } from
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 
-import { Container } from 'semantic-ui-react';
-import Home from './Home';
-import Header from './Header';
-import Campaign from './Campaign';
+// import Home from './Home';
+// import Header from './Header';
+// import Campaign from './Campaign';
 import NewCampaign from './NewCampaign';
 import Requests from './Requests';
 import NewRequest from './NewRequest';
+
+import Home from './Home2'
+import Header from './Header2'
+import Campaign from './Campaign2'
 
 class App extends Component {
     state = { campaigns: [] };
@@ -26,7 +29,7 @@ class App extends Component {
 
     render() {
         return (
-            <Container>
+                <div>
                 <Header />
                 <Switch>
                     <Route
@@ -72,20 +75,9 @@ class App extends Component {
                     />
                     <Route render={()=><h3>404 nothing here</h3>}/>
                 </Switch>
-            </Container>
+            </div>
         );
     };
-};
-
-function mapStateToProps(state) {
-    return {
-        campaigns: state.campaigns,
-        factory
-    };
-};
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch);
 };
 
 export default withRouter(App);

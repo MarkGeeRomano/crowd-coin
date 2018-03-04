@@ -16,8 +16,8 @@ class Home extends Component {
 
         return (
             <div>
-                <h3>Open Campaigns</h3>
-                <Link to='new-campaign'>
+                <h3 className={style.test}>Open Campaigns</h3>
+                <Link to='/new-campaign'>
                     <Button
                         floated="right"
                         content="Create Campaign!"
