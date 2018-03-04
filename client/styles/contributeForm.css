@@ -1,3 +1,8 @@
 .container {
-    width: 15%;
+    width: 22%;
+    text-align: center;
+}
+
+.container > div {
+    font-style: italic;
 }

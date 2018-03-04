@@ -91,7 +91,7 @@ class Campaign extends Component {
             },
             {
                 title: 'number of requests',
-                value: '3',
+                value: <Link to={`/campaigns/${this.props.id}/requests`}>3</Link>,
                 description: 'The number of open requests this campaign has',
             },
             {

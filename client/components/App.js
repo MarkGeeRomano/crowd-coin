@@ -8,12 +8,13 @@ import web3 from '../../ethereum/web3';
 // import Header from './Header';
 // import Campaign from './Campaign';
 import NewCampaign from './NewCampaign';
-import Requests from './Requests';
+// import Requests from './Requests';
 import NewRequest from './NewRequest';
 
 import Home from './Home2'
 import Header from './Header2'
 import Campaign from './Campaign2'
+import Requests from './Requests2';
 
 class App extends Component {
     state = { campaigns: [] };

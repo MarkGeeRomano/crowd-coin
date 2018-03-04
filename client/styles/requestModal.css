@@ -1,0 +1,22 @@
+.container {
+
+}
+
+.container textarea {
+    width: 250px;
+}
+
+.recipient { width: 100%; }
+
+.closeButton  {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-left: auto;
+    display: block;
+}
+
+.submitButton {
+
+}
+
