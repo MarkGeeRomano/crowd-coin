@@ -15,7 +15,7 @@ class NewCampaign extends Component {
         this.setState({ ...this.state, loading: true })
 
         const { minimumContribution } = this.state;
-        const { factory, web3 } = this.props;
+        const { factory, web3, getCampaigns } = this.props;
 
         const accounts = await web3.eth.getAccounts();
         let errMsg;
@@ -24,6 +24,7 @@ class NewCampaign extends Component {
             if (!minimumContribution) { throw { message: "You must set a minimum! If you want a contribution of 0, be explicit." } }
             await factory.methods.createCampaign(minimumContribution).send({ from: accounts[0] });
             campaigns = await factory.methods.getDeployedCampaigns().call();
+            getCampaigns();
             this.setState({ ...this.state, errMsg: '' })
         } catch (err) {
             errMsg = err.message.length > 1000 ? 'Rejected Transaction' : err.message

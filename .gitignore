@@ -1,3 +1,4 @@
 node_modules
 .DS_Store
-ethereum/deploy.js
+ethereum/deploy
+.vscode

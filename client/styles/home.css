@@ -1,0 +1,36 @@
+.container {
+    min-height: 400px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.cardsContainer {
+    vertical-align: top;
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.card {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.cardsContainer span, a {
+    font-weight: normal;
+}
+
+.campaignContainer {
+    display: inline-block;
+    vertical-align: top;
+    width: 55%;
+}
+
+.inbetween {
+    display: inline-block;
+    width: 20%;
+}
+
+
+

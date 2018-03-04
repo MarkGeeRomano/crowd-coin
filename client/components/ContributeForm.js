@@ -34,7 +34,7 @@ class ContributeForm extends Component {
 
             getSummary();
         } catch (err) {
-            errMsg = err.message.length > 1000 ? 'Rejected Transaction' : err.message
+            errMsg = err.message.length > 1000 ? 'Rejected Transaction' : err.message;
         };
 
         this.setState({

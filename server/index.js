@@ -11,6 +11,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 app.use(require('webpack-hot-middleware')(compiler));
 
+app.use(express.static('public'));
+
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 const port = process.env.NODE_ENV === 'development' ? 6969 : 4200;

@@ -1,0 +1,32 @@
+textarea {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+label {
+}
+
+input {
+    width: 20%;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    height: 3em;
+}
+
+.campaignForm {
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: inline-block;
+    width: 20%;
+    margin-right: 55px;
+    position: fixed;
+}
