@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect, Link, BrowserRouter, withRouter, Router } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
@@ -26,25 +26,30 @@ class App extends Component {
     async getCampaigns() {
         const addresses = await factory.methods.getDeployedCampaigns().call();
         const campaigns = [];
-        for(let i = 0; i < addresses.length; i++) {
+        for (let i = 0; i < addresses.length; i++) {
             const campaign = campaignGetter(addresses[i]);
             const campaignDetails = await campaign.methods.getSummary().call();
             campaignDetails['7'] = addresses[i]
             campaigns.push(campaignDetails);
         };
-        window.campaigns = campaigns
+
         this.setState({ campaigns });
     };
 
     render() {
         return (
-                <div>
+            <div>
                 <Header />
                 <Switch>
                     <Route
                         exact
                         path="/"
-                        render={() => <Home {...this.props} campaigns={this.state.campaigns} />}
+                        render={() => <Home
+                            {...this.props}
+                            campaigns={this.state.campaigns}
+                            factory={factory}
+                            web3={web3}
+                        />}
                     />
                     <Route
                         path="/new-campaign"
@@ -62,7 +67,7 @@ class App extends Component {
                         render={({ match: { params } }) => <Campaign {...{
                             ...this.props,
                             ...params,
-                            web3
+                            web3,
                         }} />}
                     />
                     <Route
@@ -71,7 +76,8 @@ class App extends Component {
                         render={({ match: { params } }) => <Requests {...{
                             ...this.props,
                             ...params,
-                            web3
+                            web3,
+                            campaignGetter
                         }} />}
                     />
                     <Route
@@ -82,7 +88,7 @@ class App extends Component {
                             web3
                         }} />}
                     />
-                    <Route render={()=><h3>404 nothing here</h3>}/>
+                    <Route render={() => <h3>404 nothing here</h3>} />
                 </Switch>
             </div>
         );

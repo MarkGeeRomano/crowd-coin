@@ -1,4 +1,28 @@
 .container {
+    width: 100%;
+    border-bottom: 1px solid var(--myBlack);
+    height: 65px;
+}
+
+.flexContainer {
+    justify-content: space-between;
+    align-items: center;
     display: flex;
-    justify-content: center;
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.flexContainer div {
+    display: inline-block;
+}
+
+.flexContainer h1 {
+    color: var(--myBlue);
+    font-size: 36px;
+}
+
+.divider {
+    width: 1px solid var(--myBlack);
+    height: 100%;
 }

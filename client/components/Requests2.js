@@ -9,7 +9,11 @@ import RequestModal from './RequestModal';
 class Requests extends Component {
 
     state = {
-        modalIsOpen: true
+        modalIsOpen: false,
+        campaign: {},
+        requests: [],
+        manager: false,
+        approver: false
     };
 
     openModal() {
@@ -18,6 +22,57 @@ class Requests extends Component {
 
     closeModal() {
         this.setState({ modalIsOpen: false });
+    };
+
+    async componentDidMount() {
+        const { campaignGetter, id, web3 } = this.props
+
+        const campaign = await campaignGetter(id);
+        const accounts = await web3.eth.getAccounts();
+        let requests = [];
+        let manager;
+        let approver;
+        try {
+            const requestsCount = await campaign.methods.requestsLength().call();
+            let request;
+            for (let i = 0; i < requestsCount; i++) {
+                request = await campaign.methods.requests(i).call();
+                requests.push(request);
+            };
+            manager = await campaign.methods.manager().call() == accounts[0];
+            approver = await campaign.methods.approvers(accounts[0]).call();
+        } catch (err) {
+            console.log(err);
+        };
+
+        this.setState({
+            ...this.state,
+            requests,
+            manager,
+            approver,
+            campaign
+        });
+    };
+
+    makeRows() {
+        const { requests, approver, manager } = this.state;
+
+        return this.state.requests.map((request, i) =>
+            < RequestRow
+                key={i + request.description}
+                id={i}
+                request={{
+                    description: request.description,
+                    value: request.value,
+                    recipient: request.recipient,
+                    approvalCount: request.approvalCount,
+                    complete: request.complete
+                }}
+                manager={manager}
+                approver={approver}
+                campaign={this.state.campaign}
+            />
+        )
     };
 
 
@@ -46,32 +101,20 @@ class Requests extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {mockData()}
+                        {this.makeRows()}
                     </tbody>
                 </table>
                 <RequestModal
                     modalIsOpen={this.state.modalIsOpen}
                     closeModal={this.closeModal.bind(this)}
                     openModal={this.openModal.bind(this)}
+                    campaignGetter={this.props.campaignGetter}
+                    id={this.props.id}
+                    web3={this.props.web3}
                 />
             </div>
         );
     };
-};
-
-function mockData() {
-    return [1, 2, 3, 4].map((x, i) =>
-        < RequestRow
-            key={i}
-            id={i}
-            request={{
-                description: 'This is for buying stuff from that dude',
-                value: Math.floor(Math.random() * 10),
-                recipient: '0xB0ADCA96e365B1BD48fC93673D4C6dc695f5f9FD',
-                approvalCount: Math.floor(Math.random() * 10)
-            }}
-        />
-    )
 };
 
 export default Requests;

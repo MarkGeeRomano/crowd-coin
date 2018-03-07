@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 import NewCampaign from './NewCampaign2';
 import styles from '../styles/home.css';
 
-const Home = ({ campaigns }) => {
-    console.log(campaigns)
+const Home = ({ campaigns, factory  }) => {
     const cards = campaigns.map((campaign => {
         return (
-            <div key={campaign} className={styles.card}>
+            <div key={campaign[7]} className={styles.card}>
                 <div>Name of Campaign: <span>{campaign[5]}</span></div>
                 <div>Address: <span>{campaign[7]}</span></div>
                 <div>Available funds(eth): <span>{campaign[1]}</span></div>
-                <Link to={'/campaigns/' + campaign}>View Campaign</Link>
+                <Link to={'/campaigns/' + campaign[7]}>View Campaign</Link>
             </div>
         )
     }));
@@ -28,7 +27,7 @@ const Home = ({ campaigns }) => {
                     </div>
                 </div>
                 <div className={styles.inbetween}></div>
-                <NewCampaign />
+                <NewCampaign factory={factory} web3={web3} />
             </div>
         </div>
     );

@@ -2,21 +2,24 @@ h2 {
     margin: 0;
 }
 
-.container {
-    display: flex;
-    justify-content: space-around;
+.donateContainer {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
 }
 
+
 .summaryContainer {
-    width: 55%;
+    width: 90%;
     text-align: center;
+    margin: 0 auto;
 }
 
 .cardsContainer {
     max-height: 550px;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .card {

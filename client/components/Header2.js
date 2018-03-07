@@ -5,11 +5,22 @@ import styles from '../styles/header.css'
 
 const Header = () => {
     return (
-        <Link to='/'>
-            <div className={styles.container}>
-                <h1>CrowdCoin</h1>
+        <div className={styles.container}>
+            <div className={styles.flexContainer}>
+                <Link to='/'>
+                    <div >
+                        <h1>CrowdCoin</h1>
+                    </div>
+                </Link>
+                <div>
+                    <div>Create New Campaign </div>
+                    &nbsp | &nbsp
+                    <div> About </div>
+                    &nbsp | &nbsp
+                    <div> &nbsp Github</div>
+                </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

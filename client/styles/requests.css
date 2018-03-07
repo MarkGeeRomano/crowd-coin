@@ -9,7 +9,7 @@ td, th {
     min-width: 50px;
 }
 
-a, h3 {
+.container a, container h3 {
     margin-right: auto;
     margin-bottom: 10px;
 }

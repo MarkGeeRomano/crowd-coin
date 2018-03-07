@@ -6,10 +6,8 @@ textarea {
 label {
 }
 
-input {
-    width: 20%;
-    margin-bottom: 20px;
-}
+
+
 
 button {
     width: 100%;
@@ -30,3 +28,7 @@ button {
     margin-right: 55px;
     position: fixed;
 }
+
+.name { width: 50%; }
+
+.contribution { width: 20%; }

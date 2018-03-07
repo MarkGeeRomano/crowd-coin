@@ -1,6 +1,7 @@
 .container {
-    width: 22%;
+    width: 20%;
     text-align: center;
+    margin-left: auto;
 }
 
 .container > div {

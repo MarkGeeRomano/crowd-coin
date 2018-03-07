@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 
-import ApproveFinalizeBtn from './ApproveFinalizeBtn';
+import ApproveFinalizeBtn from './ApproveFinalizeBtn2';
 
 class RequestRow extends Component {
 
     render() {
         const {
-            description,
-            value,
-            recipient,
-            approvalCount,
-        } = this.props.request;
+            request : {
+                description,
+                value,
+                recipient,
+                approvalCount,
+                complete
+            },
+            manager,
+            approver,
+            campaign,
+            id
+        } = this.props;
 
         return (
             <tr>
@@ -19,16 +26,14 @@ class RequestRow extends Component {
                 <td>{value}</td>
                 <td>{recipient}</td>
                 <td>{approvalCount}</td>
-                <td>
-                    <div>
-                        <button>Approve</button>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        <button>Finalize</button>
-                    </div>
-                </td>
+                <ApproveFinalizeBtn
+                    manager={manager}
+                    approver={approver}
+                    campaign={campaign}
+                    web3={web3}
+                    complete={complete}
+                    id={id}
+                />
             </tr>
         )
     };

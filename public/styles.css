@@ -1,3 +1,11 @@
-h1, h2, h3, textarea {
+h1, h2, h3, textarea, body {
     margin: 0;
 }
+
+:root {
+    --myBlue: #5b6eb1;
+    --myBlack: #656969;
+}
+
+* { font-family: 'Source Sans Pro'}
+
