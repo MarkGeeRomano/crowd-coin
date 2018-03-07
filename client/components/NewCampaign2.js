@@ -38,8 +38,8 @@ class NewCampaign extends Component {
         } catch (e) {
             console.log(e.message)
         };
-        
-        this.setState({minimum: '', name: '', description: '' });
+
+        this.setState({ minimum: '', name: '', description: '' });
     };
 
     render() {
@@ -47,23 +47,30 @@ class NewCampaign extends Component {
             <div className={styles.container}>
                 <h3>Create a Campaign</h3>
                 <form onSubmit={this.onSubmit.bind(this)}>
-                    <div>
-                        <label htmlFor='name'>Name of campaign</label>
-                        <br />
-                        <input
-                            className={styles.name}
-                            id='name'
-                            onChange={this.onChangeName.bind(this)}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='min-contribution'>Minimum Contribution For Vote (Wei)</label>
-                        <br />
-                        <input
-                            className={styles.contribution}
-                            id='min-contribution'
-                            onChange={this.onChangeContribution.bind(this)}
-                        />
+                    <div className={styles.fieldContainer}>
+                        <div className={styles.inputContainer}>
+
+                            <div>
+                                <label htmlFor='name'>Name of campaign</label>
+                                <br />
+                                <input
+                                    className={styles.name}
+                                    id='name'
+                                    onChange={this.onChangeName.bind(this)}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.inputContainer}>
+                            <div>
+                                <label htmlFor='min-contribution'>Min. Contribution (Wei)</label>
+                                <br />
+                                <input
+                                    className={styles.contribution}
+                                    id='min-contribution'
+                                    onChange={this.onChangeContribution.bind(this)}
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <label htmlFor='description'>Description of campaign</label>

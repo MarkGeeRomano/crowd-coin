@@ -5,7 +5,13 @@ h1, h2, h3, textarea, body {
 :root {
     --myBlue: #5b6eb1;
     --myBlack: #656969;
+    --myBlackLight: #4b4b4b;
+    --linkBlue: #2d2dff;
+    --boxGrey: #666;
+    --myBoxShadow: 3px 3px #f0f0f0;
+    --myBoxRadius: 30px;
 }
 
 * { font-family: 'Source Sans Pro'}
 
+#header + div { padding-top: 5% }

@@ -2,6 +2,9 @@
     width: 100%;
     border-bottom: 1px solid var(--myBlack);
     height: 65px;
+    position: fixed;
+    top: 0;
+    background-color: white;
 }
 
 .flexContainer {
@@ -15,6 +18,7 @@
 
 .flexContainer div {
     display: inline-block;
+    color: var(--myBlue);
 }
 
 .flexContainer h1 {
@@ -25,4 +29,23 @@
 .divider {
     width: 1px solid var(--myBlack);
     height: 100%;
+}
+
+.submenuContainer {
+    margin: auto 0 10px 0;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 19px;
+}
+
+.submenuItem {
+    border-right: 1.5px solid var(--myBlack);
+    padding: 0 4px;
+}
+
+.submenuItemLast {
+    border-right: none;
+    padding: 0 4px;
 }

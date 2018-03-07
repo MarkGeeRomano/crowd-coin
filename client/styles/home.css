@@ -1,35 +1,71 @@
-.container {
-    min-height: 400px;
-    width: 85%;
-    margin: 0 auto;
-}
-
-.cardsContainer {
-    vertical-align: top;
-    display: flex;
-    height: 100%;
-    justify-content: space-around;
-    flex-direction: column;
-}
-
-.card {
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
-.cardsContainer span, a {
-    font-weight: normal;
-}
-
 .campaignContainer {
     display: inline-block;
     vertical-align: top;
     width: 55%;
 }
 
+.campaignContainer h3 {
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 7px;;
+    color: var(--myBlue);
+    text-align: center;
+}
+
+.container {
+    min-height: 400px;
+    width: 85%;
+    margin: 30px auto 0;
+}
+
+.cardsContainer {
+    vertical-align: top;
+    display: flex;
+    height: 100%;
+    width: 73%;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.card {
+    font-weight: bold;
+    margin-bottom: 25px;
+    border: 0.5px solid var(--boxGrey);
+    font-size: 20px;
+    padding: 20px 0;
+    border-radius: var(--myBoxRadius);
+    box-shadow: var(--myBoxShadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card > div {
+    margin-bottom: 10px;
+    width: 75%;
+}
+
+.address {
+    font-size: 13px;
+}
+
+.cardsContainer span, a {
+    font-weight: normal;
+}
+
+.cardsContainer span {
+    color: var(--myBlackLight);
+}
+
+
+.cardsContainer a div {
+    display: inline-block;
+    color: var(--linkBlue);
+}
 .inbetween {
     display: inline-block;
-    width: 20%;
+    width: 15%;
 }
 
 
