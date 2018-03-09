@@ -80,7 +80,7 @@ class NewCampaign extends Component {
                             onChange={this.onChangeDescription.bind(this)}
                         />
                     </div>
-                    <button >Create!</button>
+                    <button >Create Campaign</button>
                 </form>
             </div>
         );

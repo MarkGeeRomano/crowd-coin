@@ -80,30 +80,32 @@ class Requests extends Component {
         return (
             <div className={styles.container}>
                 <div className={styles.headerContainer}>
-                    <div>
-                        <Link to={`/campaigns/${this.props.id}`}>Go back to campaign</Link>
-                        <h3>This campaign's requests</h3>
-                    </div>
+                    <Link to={`/campaigns/${this.props.id}`}>
+                        <button>Go back to campaign</button>
+                    </Link>
                     <button onClick={this.openModal.bind(this)}>
-                        Create New Campaign
+                        Create New Request
                     </button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Recipient</th>
-                            <th>Approval count</th>
-                            <th>Approve</th>
-                            <th>Finalize</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.makeRows()}
-                    </tbody>
-                </table>
+                <div className={styles.tableContainer}>
+                    <h3>This campaign's requests</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Recipient</th>
+                                <th>Approval count</th>
+                                <th>Approve</th>
+                                <th>Finalize</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.makeRows()}
+                        </tbody>
+                    </table>
+                </div>
                 <RequestModal
                     modalIsOpen={this.state.modalIsOpen}
                     closeModal={this.closeModal.bind(this)}

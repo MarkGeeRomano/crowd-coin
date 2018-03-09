@@ -2,16 +2,47 @@ h1, h2, h3, textarea, body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    color: #08f;
+}
+
 :root {
     --myBlue: #5b6eb1;
     --myBlack: #656969;
     --myBlackLight: #4b4b4b;
-    --linkBlue: #2d2dff;
     --boxGrey: #666;
     --myBoxShadow: 3px 3px #f0f0f0;
-    --myBoxRadius: 30px;
+    --myBoxRadius: 20px;
+    --myInputTextareaRadius: 5px;
+    --myInputTextareaBorder: .5px solid #CCCCCC;
+    --myInputTextareaColor: #626262;
+    --buttonBlue: #6093D5;
+    --buttonRadius: 10px;
 }
 
 * { font-family: 'Source Sans Pro'}
 
+
 #header + div { padding-top: 5% }
+
+textarea, input {
+    border: var(--myInputTextareaBorder);
+    border-radius: var(--myInputTextareaRadius);
+    resize: none;
+    color: var(--myInputTextareaColor);
+    font-size: 15px;
+    padding: 3px;
+}
+
+input { height: 2em; }
+
+button {
+    border: 1px solid;
+    border-radius: var(--buttonRadius);
+    background-color: var(--buttonBlue);
+    letter-spacing: 1.5px;
+    color: white;
+    height: 3.5em;
+    box-shadow: var(--myBoxShadow);
+}

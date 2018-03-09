@@ -3,9 +3,10 @@ h2 {
 }
 
 .donateContainer {
-    width: 90%;
+    width: 85%;
     text-align: center;
     margin: 0 auto;
+    height: 35px;
 }
 
 
@@ -23,22 +24,44 @@ h2 {
 }
 
 .card {
-    border: 1px solid black;
+    border: 1px solid var(--boxGrey);
     padding: 12px 0;
-    height: 125px;
-    margin: 15px;
+    height: 145px;
+    margin: 30px;
     width: 360px;
+    z-index: -1;
+    border-radius: var(--myBoxRadius);
+    box-shadow: var(--myBoxShadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card a {
+    text-decoration: none;
+}
+
+.card a div {
+    color: #08f;
+    border: 1px solid #08f;
+    padding: 3px 8px;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 .title {
     font-size: 20px;
+    font-weight: bold;
 }
 
 .value {
-    font-size: 17px;
+    font-size: 30px;
     padding: 5px 0;
+    color:#18bdc3;
+    text-decoration: none;
 }
 
-.description {
-    font-size: 14px;
+.description{
+    font-size: 12px;
 }
+

@@ -4,12 +4,19 @@
     width: 55%;
 }
 
-.campaignContainer h3 {
+.campaignContainer h2 {
     font-weight: bold;
     font-size: 25px;
-    margin-bottom: 7px;;
-    color: var(--myBlue);
+    margin-bottom: 7px;
     text-align: center;
+    letter-spacing: 5px;
+}
+
+.campaignContainer > div {
+    display: flex;
+    width: 68%;
+    align-items: center;
+    flex-direction: column;
 }
 
 .container {
@@ -22,10 +29,10 @@
     vertical-align: top;
     display: flex;
     height: 100%;
-    width: 73%;
+    width: 100%;
     justify-content: space-around;
     flex-direction: column;
-    margin: 0 auto;
+    margin-right: auto;
 }
 
 .card {
@@ -43,26 +50,41 @@
 
 .card > div {
     margin-bottom: 10px;
-    width: 75%;
+    width: 80%;
 }
 
 .address {
     font-size: 13px;
 }
 
-.cardsContainer span, a {
+.cardsContainer span {
     font-weight: normal;
 }
+
+.cardsContainer a {
+    font-weight: normal;
+    width: 80%;
+    margin-top: 15px;
+}
+
 
 .cardsContainer span {
     color: var(--myBlackLight);
 }
 
-
 .cardsContainer a div {
     display: inline-block;
-    color: var(--linkBlue);
+    background-color: var(--buttonBlue);
+    border-radius: var(--buttonRadius);
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    padding: .5em 0;
+    margin: auto 0;
+    width: 100%;
+    text-align: center;
 }
+
 .inbetween {
     display: inline-block;
     width: 15%;

@@ -1,9 +1,52 @@
+.shell {
+    width: 24%;
+    background-color: white;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 3px;
+    border: .5px solid var(--boxGrey);
+    border-radius: calc(var(--myBoxRadius) - 5px);
+}
+
+.frameTop {
+    border-bottom: .5px solid var(--boxGrey);
+    padding: .5em 0;
+}
+
+.frameBottom {
+    height: 20px;
+    color:#1b6cb0;
+    display: inline-block;
+    width: 100%;
+    border-top: .5px solid var(--boxGrey);
+}
+
 .container {
-    width: 20%;
-    text-align: center;
+    width: 100%;
     margin-left: auto;
 }
 
+.animatorContainer {
+
+}
 .container > div {
     font-style: italic;
 }
+
+.container label {
+    display: block;
+    font-size: 13px;
+    padding: 1em 0 .5em 0;
+}
+
+.container input {
+    height: 1em;
+    width: 38%;
+}
+
+.container button {
+    width: 35%;
+    padding: .5em;
+    margin: 9px 0 6px 0;
+}
+

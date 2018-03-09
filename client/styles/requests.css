@@ -1,14 +1,3 @@
-table {
-    border-collapse: collapse;
-    text-align: center;
-    width: 90%;
-}
-
-td, th {
-    border: 1px solid black;
-    min-width: 50px;
-}
-
 .container a, container h3 {
     margin-right: auto;
     margin-bottom: 10px;
@@ -23,13 +12,64 @@ td, th {
 
 .headerContainer {
     display: flex;
-    width: 90%;
+    width: 85%;
     justify-content: space-between;
+    margin: 15px 0;
+    align-items: flex-end;
 }
 
-button {
-    margin: auto 0 5px 0;
+.headerContainer > div {
+    border: 1px solid #08f;
+    padding: 5px;
+    border-radius: 7px;
+    border-radius: var(--buttonRadius);
+}
+
+.headerContainer span {
+    font-size: 30px;
+}
+
+.headerContainer span + div {
+    display: inline-block;
+}
+
+.headerContainer button {
+}
+
+.tableContainer {
+    width: 85%;
+}
+
+.tableContainer h3 {
+    margin-bottom: 5px;
+}
+
+.tableContainer table {
+    text-align: center;
+    width: 100%;
+    border-spacing: 0.25rem;
+}
+
+.tableContainer td, th {
+    border: 1px solid var(--boxGrey);
+    border-radius: 2px;
+    min-width: 50px;
+}
+
+.tableContainer th {
+    height: 2.5em;
+    background-color: #bce3c2;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    padding: 0 8px;
+}
+
+.tableContainer td {
+    height: 3em;
+}
+
+.tableContainer th:nth-child(2) { min-width: 400px; }
+
+.buttonStyle {
     width: 100px;
 }
-
-th:nth-child(2) { min-width: 400px; }

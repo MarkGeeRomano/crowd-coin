@@ -40,15 +40,16 @@ class Campaign extends Component {
     };
 
     makeCards() {
-        return this.makeContent().map(item =>
-            <div className={styles.card} key={item.title}>
+        return this.makeContent().map((item, i) =>
+            <div style={i ==3 ? {zIndex:1} : {}}className={styles.card} key={item.title}>
                 <div className={styles.title}>{item.title.toUpperCase()}</div>
                 <div
-                    style={item.isDesc ? { fontSize: '12px' } : null}
+                    style={item.isDescAdd ? { fontSize: '15px', color: '#18bdc3' } : null}
                     className={styles.value}>
                     {item.value}
                 </div>
                 <div className={styles.description}>{item.description}</div>
+                {item.link}
             </div>
         );
     };
@@ -103,22 +104,27 @@ class Campaign extends Component {
                 title: 'campaign description',
                 value: description,
                 description: '',
-                isDesc: true
+                isDescAdd: true
             },
             {
                 title: 'address of manager',
                 value: manager,
                 description: "The creator of this campaign. They're able to create and finalize requests for campaign",
+                isDescAdd: true
             },
             {
                 title: 'campaign balance',
-                value: Math.round(web3.utils.fromWei(balance, 'ether') * 1000) + ' (ETH)',
+                value: Math.round(web3.utils.fromWei(balance, 'ether')) + ' (ETH)',
                 description: 'The amount of ether this campaign has',
             },
             {
                 title: 'number of requests',
-                value: <Link to={`/campaigns/${this.props.id}/requests`}>{requestsCount}</Link>,
+                value: requestsCount,
                 description: 'The number of open requests this campaign has',
+                link:
+                    <Link to={`/campaigns/${this.props.id}/requests`}>
+                        <div>Go To Requests</div>
+                    </Link>,
             },
             {
                 title: 'number of approvers',
@@ -126,7 +132,7 @@ class Campaign extends Component {
                 description: 'The number of donators with request voting rights',
             },
             {
-                title: 'Min. contribution for voting rights',
+                title: 'Min. contribution for vote',
                 value: minContribution + ' (WEI)',
                 description: 'The amount needed to contribute to gain voting rights',
             }

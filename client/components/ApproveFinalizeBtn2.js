@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../styles/requests.css';
 
 class ApproveFinalizeBtn extends Component {
     state = {
@@ -40,14 +41,14 @@ class ApproveFinalizeBtn extends Component {
 
         return [
             <td key={1}>
-                <button onClick={this.onApprove.bind(this)}>
+                <div className={styles.buttonStyle} onClick={this.onApprove.bind(this)}>
                     {approver ? 'Approve' : "Can't Approve"}
-                </button>
+                </div>
             </td>,
             <td key={2}>
-                <button onClick={this.onFinalize.bind(this)}>
+                <div className={styles.buttonStyle} onClick={this.onFinalize.bind(this)}>
                     {manager ? 'Finalize' : "Can't Finalize"}
-                </button>
+                </div>
             </td>
         ];
     };

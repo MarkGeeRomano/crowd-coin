@@ -16,6 +16,10 @@
     margin: 0 auto;
 }
 
+.flexContainer a {
+    margin-top: auto;
+}
+
 .flexContainer div {
     display: inline-block;
     color: var(--myBlue);
@@ -32,8 +36,8 @@
 }
 
 .submenuContainer {
-    margin: auto 0 10px 0;
-    width: 25%;
+    margin-top: auto;
+    width: 35%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,10 +46,10 @@
 
 .submenuItem {
     border-right: 1.5px solid var(--myBlack);
-    padding: 0 4px;
+    padding: 0 16px;
 }
 
 .submenuItemLast {
     border-right: none;
-    padding: 0 4px;
+    padding-left: 16px;
 }

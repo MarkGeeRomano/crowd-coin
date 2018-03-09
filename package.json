@@ -27,6 +27,7 @@
     "nodemon": "^1.15.1",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.0.2",
+    "react-animate-height": "^0.10.10",
     "react-dom": "^16.2.0",
     "react-modal": "^3.3.1",
     "react-redux": "^4.4.5",
