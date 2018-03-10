@@ -1,22 +1,52 @@
-.container {
+.closeButton  {
+    margin-left: 100%;
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+}
 
+.container h2 {
+    margin-bottom: 10px;
 }
 
 .container textarea {
-    width: 250px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-.recipient { width: 100%; }
-
-.closeButton  {
-    width: auto;
-    height: auto;
-    padding: 0;
-    margin-left: auto;
-    display: block;
+.container form > div {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-.submitButton {
+.container form > div > div:first-child{
+    width: 60%;
+}
+.container form > div > div{
+    width: 40%;
+}
 
+.container form > div > div:first-child input{
+    width: 100%;
+}
+
+.container form > div > div input{
+    width: 70%;
+}
+.container form button {
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 3px;
+    height: 2.5em;
+    cursor: pointer;
+}
+
+
+
+
+.container label {
+    display:block;
 }
 

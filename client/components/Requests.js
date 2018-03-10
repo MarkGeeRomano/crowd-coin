@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import campaignGetter from '../../ethereum/Campaign';
+
 import styles from '../styles/requests.css'
 import Modal from 'react-modal';
-import RequestRow from './RequestRow2';
+import RequestRow from './RequestRow';
 import RequestModal from './RequestModal';
 
 class Requests extends Component {

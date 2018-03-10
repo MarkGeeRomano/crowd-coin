@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import NewCampaign from './NewCampaign2';
+import NewCampaign from './NewCampaign';
 import styles from '../styles/home.css';
 
 const Home = ({ campaigns, factory, web3 }) => {

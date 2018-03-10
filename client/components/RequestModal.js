@@ -10,7 +10,10 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        width: '35%',
+        paddingTop: '2px',
+        paddingBottom: '15px'
     }
 };
 
@@ -60,29 +63,29 @@ class RequestModal extends Component {
                 style={customStyles}
                 appElement={document.body}
             >
+                <div
+                    onClick={this.props.closeModal}
+                    className={styles.closeButton}
+                >
+                    x
+                </div>
                 <div className={styles.container}>
-                    <div>
-                        <button
-                            onClick={this.props.closeModal}
-                            className={styles.closeButton}
-                        >
-                            x
-                        </button>
+                        
                         <h2>Create Request</h2>
-                    </div>
+                    
                     <form onSubmit={this.onSubmit.bind(this)}>
                         <label>Request description</label>
-                        <br />
                         <textarea onChange={this.descriptionOnChange.bind(this)} rows='4' />
-                        <br />
-                        <label>Request recipient (address)</label>
-                        <br />
-                        <input className={styles.recipient} onChange={this.recipientOnChange.bind(this)} />
-                        <br />
-                        <label>Request value (eth)</label>
-                        <br />
-                        <input onChange={this.valueOnChange.bind(this)} />
-                        <br />
+                        <div>
+                            <div>
+                                <label>Request recipient (address)</label>
+                                <input className={styles.recipient} onChange={this.recipientOnChange.bind(this)} />
+                            </div>
+                            <div>
+                                <label>Request value (eth)</label>
+                                <input onChange={this.valueOnChange.bind(this)} />
+                            </div>
+                        </div>
                         <button className={styles.submitButton} >Submit</button>
                     </form>
                 </div>

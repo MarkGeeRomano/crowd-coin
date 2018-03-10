@@ -6,7 +6,7 @@ import web3 from '../../ethereum/web3';
 
 import styles from '../styles/campaign.css';
 
-import ContributeForm from './ContributeForm2';
+import ContributeForm from './ContributeForm';
 
 class Campaign extends Component {
     constructor() {

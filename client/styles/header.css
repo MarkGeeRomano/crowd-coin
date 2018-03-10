@@ -21,7 +21,6 @@
 }
 
 .flexContainer div {
-    display: inline-block;
     color: var(--myBlue);
 }
 
@@ -37,7 +36,6 @@
 
 .submenuContainer {
     margin-top: auto;
-    width: 35%;
     display: flex;
     justify-content: space-between;
     align-items: center;

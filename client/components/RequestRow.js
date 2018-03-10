@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ApproveFinalizeBtn from './ApproveFinalizeBtn2';
+import ApproveFinalizeBtn from './ApproveFinalizeBtn';
 
 class RequestRow extends Component {
 
