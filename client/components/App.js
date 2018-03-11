@@ -11,9 +11,15 @@ import Campaign from './Campaign'
 import Requests from './Requests';
 
 class App extends Component {
-    state = { campaigns: [] };
+    state = {
+        campaigns: [],
+        rinkeby: true
+    };
 
     async componentDidMount() {
+        if (await web3.eth.net.getNetworkType() != 'rinkeby') {
+            return this.setState({ rinkeby: false });
+        }
         this.getCampaigns();
     };
 
@@ -43,6 +49,8 @@ class App extends Component {
                             campaigns={this.state.campaigns}
                             factory={factory}
                             web3={web3}
+                            getCampaigns={this.getCampaigns.bind(this)}
+                            rinkeby={this.state.rinkeby}
                         />}
                     />
                     <Route
@@ -52,7 +60,8 @@ class App extends Component {
                             factory,
                             web3,
                             getCampaigns: this.getCampaigns.bind(this),
-                            campaigns: this.state.campaigns
+                            campaigns: this.state.campaigns,
+                            rinkeby: this.state.rinkeby
                         }} />}
                     />
                     <Route
@@ -62,6 +71,7 @@ class App extends Component {
                             ...this.props,
                             ...params,
                             web3,
+                            rinkeby: this.state.rinkeby
                         }} />}
                     />
                     <Route
@@ -71,18 +81,20 @@ class App extends Component {
                             ...this.props,
                             ...params,
                             web3,
-                            campaignGetter
+                            campaignGetter,
+                            rinkeby: this.state.rinkeby
                         }} />}
                     />
                     <Route
-                        path="/campaigns/:id/requests/new"
-                        render={({ match: { params } }) => <NewRequest {...{
-                            ...this.props,
-                            ...params,
-                            web3
-                        }} />}
+                        path='/rinkeby'
+                        render={(history) =>
+                         !this.state.rinkeby ?
+                            <div style={{ margin: '50px' }}>You're not on the Rinkeby network. Please switch to view the site!</div>
+                            :
+                            <Redirect to='/'/>
+                        }
                     />
-                    <Route render={() => <h3>404 nothing here</h3>} />
+                    <Route render={() => <div style={{ margin: '50px' }}>404 nothing here homie</div>} />
                 </Switch>
             </div>
         );

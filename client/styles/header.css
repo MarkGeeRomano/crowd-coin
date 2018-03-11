@@ -25,8 +25,9 @@
 }
 
 .flexContainer h1 {
-    color: var(--myBlue);
+    color: #ffab00;
     font-size: 36px;
+    font-weight: lighter;
 }
 
 .divider {
@@ -51,3 +52,22 @@
     border-right: none;
     padding-left: 16px;
 }
+
+.github{
+    background-image:  url('/github_icon.svg');
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.ether{
+    background-image:  url('/ether_icon.png');
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+

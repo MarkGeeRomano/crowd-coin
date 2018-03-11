@@ -22,7 +22,9 @@ class RequestModal extends Component {
     state = {
         description: '',
         recipient: '',
-        value: ''
+        value: '',
+        msg: '',
+        error: ''
     };
 
     descriptionOnChange(e) {
@@ -43,16 +45,55 @@ class RequestModal extends Component {
     async onSubmit(e) {
         e.preventDefault();
         const { id, campaignGetter, web3 } = this.props;
-        const { description, value, recipient } = this.state;
+        let {
+            description,
+            value,
+            recipient,
+            error,
+            msg
+        } = this.state;
 
-        const campaign = await campaignGetter(id);
-        const accounts = await web3.eth.getAccounts();
+        error = false;
+        msg = '';
+
+        this.setState({ ...this.state, loading: true, msg, error })
         try {
-            campaign.methods.createRequest(description, value, recipient)
-                .send({ from: accounts[0] });
+            const invalid = (validateDesc(description) || validateValue(value) || validateRecipient(recipient));
+            if (invalid) { throw invalid; };
+
+            const campaign = await campaignGetter(id);
+            const accounts = await web3.eth.getAccounts();
+
+            this.props.closeModal();
+            this.props.addingRow();
+
+            await campaign.methods.createRequest(
+                description,
+                web3.utils.toWei(value, 'ether'),
+                recipient
+            ).send({ from: accounts[0] });
+
+            description = '';
+            recipient = '';
+            value = '';
         } catch (err) {
-            console.log(err);
+            console.log(`err:`,err)
+            error = true;
+            msg = err.message.length > 500 ? 'Rejected transaction!' : err.message;
+            this.props.openModal();
+            this.props.turnOffSpinners();
         };
+
+        this.props.doneAddingRow();
+        this.setState({
+            ...this.state,
+            loading: false,
+            recipient,
+            value,
+            description,
+            error,
+            msg
+        });
     };
 
     render() {
@@ -70,9 +111,7 @@ class RequestModal extends Component {
                     x
                 </div>
                 <div className={styles.container}>
-                        
-                        <h2>Create Request</h2>
-                    
+                    <h2>Create Request</h2>
                     <form onSubmit={this.onSubmit.bind(this)}>
                         <label>Request description</label>
                         <textarea onChange={this.descriptionOnChange.bind(this)} rows='4' />
@@ -88,10 +127,45 @@ class RequestModal extends Component {
                         </div>
                         <button className={styles.submitButton} >Submit</button>
                     </form>
+                    {this.state.msg && <div className='msgBox error'> {this.state.msg} </div>}
                 </div>
             </Modal>
         );
     };
+};
+
+function validateDesc(description) {
+    switch (true) {
+        case !description:
+            return new Error("Description can't be blank");
+        case description.length >= 100:
+            return new Error('description must be less than 100 characters');
+    };
+    return false;
+};
+
+function validateValue(value) {
+    switch (true) {
+        case !value:
+            return new Error('Must have a value');
+        case isNaN(value):
+            return new Error('Not a valid value');
+    };
+    return false;
+};
+
+function validateRecipient(recipient) {
+    switch (true) {
+        case !recipient.length:
+            return new Error("Recipient can't be blank");
+        case recipient.length != 42:
+        case recipient[1] != 'x':
+        case recipient[0] != 0:
+            return new Error("Recipient appears to be invalid");
+        case recipient.length >= 200:
+            return new Error('Description must be less than 200 characters');
+    };
+    return false;
 };
 
 export default RequestModal;

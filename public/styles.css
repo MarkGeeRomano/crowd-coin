@@ -24,7 +24,7 @@ a {
 * { font-family: 'Source Sans Pro'}
 
 
-#header + div { padding-top: 5% }
+#header + div { padding-top: 70px }
 
 textarea, input {
     border: var(--myInputTextareaBorder);
@@ -43,6 +43,61 @@ button {
     background-color: var(--buttonBlue);
     letter-spacing: 1.5px;
     color: white;
-    height: 3.5em;
     box-shadow: var(--myBoxShadow);
+    padding: .5em 0;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #2738f3;
+    width: 15px;
+    height: 15px;
+    animation: spin .5s linear infinite;
+    margin: 0 auto;
+}
+
+.loaderSm {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #2738f3;
+    width: 10px;
+    height: 10px;
+}
+
+.loaderRow {
+    border-top: 5px solid #8c8c8f;
+}
+
+.loaderAppFin {
+    border-top: 5px solid #3af327;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.msgBox {
+    text-align: center;
+    padding: 1em 0;
+    border-radius: var(--buttonRadius);
+}
+
+.error {
+    background-color: #feaaaa;
+    border: 1px solid #cb8686;
+    color: #c51d3b;
+}
+
+.success {
+    background-color: #a1ffa1;
+    border: 1px solid #65e165;
+    color: #599c4c;
+}
+
+.sm {
+    width: 90%;
+    display: inline-block;
+    font-size: 12px;
 }

@@ -9,7 +9,106 @@ class NewCampaign extends Component {
         name: '',
         description: '',
         minimum: '',
-        errMsg: ''
+        msg: '',
+        error: false,
+        loading: false
+    };
+
+    async onSubmit(e) {
+        e.preventDefault();
+        let {
+            name,
+            minimum,
+            description,
+            error,
+            msg
+        } = this.state;
+
+        error = false;
+        msg = '';
+
+        this.setState({ ...this.state, loading: true, msg, error })
+        try {
+            const invalid = (validateDesc(description) || validateMin(minimum) || validateName(name));
+            if (invalid) { throw invalid; };
+
+            const accounts = await this.props.web3.eth.getAccounts();
+            await factory.methods.createCampaign(
+                    this.props.web3.utils.toWei(minimum, 'ether'),
+                    name,
+                    description
+                ).send({ from: accounts[0] });
+
+            minimum = '';
+            name = '';
+            description = '';
+            msg = 'Successfully created campaign!';
+            error: false;
+            this.props.getCampaigns();
+        } catch (err) {
+            error = true;
+            msg = err.message.length > 500 ? 'Rejected transaction!' : err.message;
+        };
+
+        this.setState({
+            ...this.state,
+            loading: false,
+            name,
+            minimum,
+            description,
+            error,
+            msg
+        });
+    };
+
+    render() {
+        return (
+            <div className={styles.container}>
+                <h3>Create a Campaign 📮</h3>
+                <form autoComplete='off' onSubmit={this.onSubmit.bind(this)}>
+                    <div className={styles.fieldContainer}>
+                        <div className={styles.inputContainer}>
+
+                            <div>
+                                <label htmlFor='name'>Name of campaign</label>
+                                <br />
+                                <input
+                                    value={this.state.name}
+                                    className={styles.name}
+                                    id='name'
+                                    onChange={this.onChangeName.bind(this)}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.inputContainer}>
+                            <div>
+                                <label htmlFor='min-contribution'>Min. Contribution (Eth)</label>
+                                <br />
+                                <input
+                                    value={this.state.minimum}
+                                    id='min-contribution'
+                                    onChange={this.onChangeContribution.bind(this)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor='description'>Description of campaign</label>
+                        <textarea
+                            value={this.state.description}
+                            rows='4'
+                            id='description'
+                            onChange={this.onChangeDescription.bind(this)}
+                        />
+                    </div>
+                    <button >{this.state.loading ? <div className='loader'></div> : 'Create Campaign'}</button>
+                    {this.state.msg &&
+                        <div className={this.state.error ? 'msgBox error' : 'msgBox success'}>
+                            {this.state.msg}
+                        </div>}
+                </form>
+            </div>
+        );
     };
 
     onChangeName(e) {
@@ -26,65 +125,36 @@ class NewCampaign extends Component {
         e.preventDefault();
         this.setState({ ...this.state, description: e.target.value });
     };
+};
 
-    async onSubmit(e) {
-        e.preventDefault();
-        const { minimum, name, description } = this.state;
-
-        const accounts = await web3.eth.getAccounts();
-        try {
-            await factory.methods.createCampaign(minimum, name, description)
-                .send({ from: accounts[0] });
-        } catch (e) {
-            console.log(e.message)
-        };
-
-        this.setState({ minimum: '', name: '', description: '' });
+function validateName(name) {
+    switch (true) {
+        case !name:
+            return new Error("Name can't be blank");
+        case name.length >= 30:
+            return new Error('Name must be less than 30 characters');
     };
+    return false;
+};
 
-    render() {
-        return (
-            <div className={styles.container}>
-                <h3>Create a Campaign</h3>
-                <form onSubmit={this.onSubmit.bind(this)}>
-                    <div className={styles.fieldContainer}>
-                        <div className={styles.inputContainer}>
-
-                            <div>
-                                <label htmlFor='name'>Name of campaign</label>
-                                <br />
-                                <input
-                                    className={styles.name}
-                                    id='name'
-                                    onChange={this.onChangeName.bind(this)}
-                                />
-                            </div>
-                        </div>
-                        <div className={styles.inputContainer}>
-                            <div>
-                                <label htmlFor='min-contribution'>Min. Contribution (Wei)</label>
-                                <br />
-                                <input
-                                    className={styles.contribution}
-                                    id='min-contribution'
-                                    onChange={this.onChangeContribution.bind(this)}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label htmlFor='description'>Description of campaign</label>
-                        <textarea
-                            rows='4'
-                            id='description'
-                            onChange={this.onChangeDescription.bind(this)}
-                        />
-                    </div>
-                    <button >Create Campaign</button>
-                </form>
-            </div>
-        );
+function validateMin(min) {
+    switch (true) {
+        case !min:
+            return new Error('Must have a minimum amount');
+        case isNaN(min):
+            return new Error('Not a valid minumum');
     };
+    return false;
+};
+
+function validateDesc(description) {
+    switch (true) {
+        case !description.length:
+            return new Error("Description can't be blank");
+        case description.length >= 200:
+            return new Error('Description must be less than 200 characters');
+    };
+    return false;
 };
 
 export default NewCampaign;

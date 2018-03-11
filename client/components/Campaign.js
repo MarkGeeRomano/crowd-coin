@@ -3,6 +3,7 @@ import { Card, Grid, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import campaignGetter from '../../ethereum/Campaign';
 import web3 from '../../ethereum/web3';
+import isRinkeby from './isRinkeby';
 
 import styles from '../styles/campaign.css';
 
@@ -55,6 +56,7 @@ class Campaign extends Component {
     };
 
     render() {
+        console.log('rendering')
         return (
             <div className={styles.container}>
                 <div className={styles.donateContainer}>
@@ -74,20 +76,6 @@ class Campaign extends Component {
         );
     };
 
-    async getSummary() {
-        // const kampaign = await campaignGetter(this.props.id);
-        // const summary = await kampaign.methods.getSummary().call();
-
-        // this.setState({
-        //     minContribution: summary[0],
-        //     balance: summary[1],
-        //     requestsCount: summary[2],
-        //     approversCount: summary[3],
-        //     manager: summary[4],
-        //     kampaign
-        // });
-    };
-
 
     makeContent() {
         const {
@@ -101,43 +89,43 @@ class Campaign extends Component {
 
         return [
             {
-                title: 'campaign description',
+                title: 'campaign description 📃',
                 value: description,
                 description: '',
                 isDescAdd: true
             },
             {
-                title: 'address of manager',
+                title: 'address of manager 👩‍⚖️',
                 value: manager,
                 description: "The creator of this campaign. They're able to create and finalize requests for campaign",
                 isDescAdd: true
             },
             {
-                title: 'campaign balance',
+                title: 'campaign balance 💰',
                 value: Math.round(web3.utils.fromWei(balance, 'ether')) + ' (ETH)',
                 description: 'The amount of ether this campaign has',
             },
             {
-                title: 'number of requests',
+                title: 'number of requests 🗃',
                 value: requestsCount,
                 description: 'The number of open requests this campaign has',
                 link:
                     <Link to={`/campaigns/${this.props.id}/requests`}>
-                        <div>Go To Requests</div>
+                        <button>Go To Requests</button>
                     </Link>,
             },
             {
-                title: 'number of approvers',
+                title: 'number of approvers ⚖️',
                 value: approversCount,
                 description: 'The number of donators with request voting rights',
             },
             {
-                title: 'Min. contribution for vote',
-                value: minContribution + ' (WEI)',
+                title: 'Min. contribution for vote 💸',
+                value: this.props.web3.utils.fromWei(minContribution, 'ether') + ' (ETH)',
                 description: 'The amount needed to contribute to gain voting rights',
             }
         ]
     };
 };
 
-export default Campaign;
+export default isRinkeby(Campaign);

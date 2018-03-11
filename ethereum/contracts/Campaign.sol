@@ -95,4 +95,9 @@ contract Campaign {
         return requests.length;
     }
 
+    function approved(uint index) public view returns (bool) {
+        Request storage request = requests[index];
+        return request.approvals[msg.sender];
+    }
+
 }

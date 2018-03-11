@@ -14,7 +14,7 @@
 
 .campaignContainer > div {
     display: flex;
-    width: 68%;
+    width: 75%;
     align-items: center;
     flex-direction: column;
 }
@@ -53,6 +53,10 @@
     width: 80%;
 }
 
+.card a div {
+    box-shadow: var(--myBoxShadow);
+}
+
 .address {
     font-size: 13px;
 }
@@ -70,6 +74,7 @@
 
 .cardsContainer span {
     color: var(--myBlackLight);
+    font-size: 16px;
 }
 
 .cardsContainer a div {

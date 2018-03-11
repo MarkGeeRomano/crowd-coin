@@ -20,14 +20,14 @@ h2 {
     max-height: 550px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .card {
     border: 1px solid var(--boxGrey);
-    padding: 12px 0;
+    padding: 12px 5px;
     height: 145px;
-    margin: 30px;
+    margin: 30px 5px;
     width: 360px;
     z-index: -1;
     border-radius: var(--myBoxRadius);
@@ -47,6 +47,11 @@ h2 {
     padding: 3px 8px;
     border-radius: 5px;
     display: inline-block;
+}
+
+.card button {
+    width: 90%;
+    cursor: pointer;
 }
 
 .title {

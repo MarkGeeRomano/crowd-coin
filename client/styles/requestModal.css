@@ -30,6 +30,8 @@
 
 .container form > div > div:first-child input{
     width: 100%;
+    font-size: 14px;
+    padding-left: 5px;
 }
 
 .container form > div > div input{
@@ -41,6 +43,7 @@
     letter-spacing: 3px;
     height: 2.5em;
     cursor: pointer;
+    margin-bottom: 7px;
 }
 
 

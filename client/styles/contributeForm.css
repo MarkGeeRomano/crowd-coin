@@ -39,13 +39,17 @@
     padding: 1em 0 .5em 0;
 }
 
+.container form {
+    padding-bottom: 5px;
+}
+
 .container input {
     height: 1em;
     width: 38%;
 }
 
 .container button {
-    width: 35%;
+    width: 90%;
     padding: .5em;
     margin: 9px 0 6px 0;
 }

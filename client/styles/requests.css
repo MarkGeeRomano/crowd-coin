@@ -1,8 +1,3 @@
-.container a, container h3 {
-    margin-right: auto;
-    margin-bottom: 10px;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -10,11 +5,16 @@
     padding-top: 25px;
 }
 
+.container button, a {
+    cursor: pointer;
+}
+
+
 .headerContainer {
     display: flex;
     width: 85%;
     justify-content: space-between;
-    margin: 15px 0;
+    margin: 15px 0 35px 0;
     align-items: flex-end;
 }
 
@@ -34,6 +34,9 @@
 }
 
 .headerContainer button {
+    height: 2.5em;
+    font-size: 14px;
+    padding: 0 5px;
 }
 
 .tableContainer {
@@ -41,7 +44,7 @@
 }
 
 .tableContainer h3 {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .tableContainer table {
@@ -57,11 +60,11 @@
 }
 
 .tableContainer th {
-    height: 2.5em;
-    background-color: #bce3c2;
     font-weight: lighter;
     letter-spacing: 1px;
     padding: 0 8px;
+    border: none;
+    font-weight: bold;
 }
 
 .tableContainer td {
@@ -71,6 +74,6 @@
 .tableContainer th:nth-child(2) { min-width: 400px; }
 
 .buttonStyle {
-    width: 100px;
+    cursor: pointer;
 }
 
