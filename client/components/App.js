@@ -5,10 +5,11 @@ import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import campaignGetter from '../../ethereum/Campaign';
 
-import Home from './Home'
-import Header from './Header'
-import Campaign from './Campaign'
+import Home from './Home';
+import Header from './Header';
+import Campaign from './Campaign';
 import Requests from './Requests';
+import About from './About';
 
 class App extends Component {
     state = {
@@ -85,6 +86,7 @@ class App extends Component {
                             rinkeby: this.state.rinkeby
                         }} />}
                     />
+                    <Route path='/about' component={About}/>
                     <Route
                         path='/rinkeby'
                         render={(history) =>
