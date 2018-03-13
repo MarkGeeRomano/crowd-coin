@@ -14,7 +14,7 @@ class NewCampaign extends Component {
         error: false,
         loading: false
     };
- 
+
     async onSubmit(e) {
         e.preventDefault();
         let {

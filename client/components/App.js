@@ -14,33 +14,16 @@ import Test from './Test';
 
 class App extends Component {
     state = {
-        campaigns: [],
         rinkeby: true,
         hasAddress: true
     };
 
     async componentDidMount() {
-        if (await web3.eth.net.getNetworkType() != 'rinkeby') {
-            return this.setState({ rinkeby: false });
-        }
-        const address = await web3.eth.getAccounts();
-        const hasAddress = !!address[0];
-    
-    };
+        const rinkeby = await web3.eth.net.getNetworkType() === 'rinkeby' ? true : false;
+        const addresses = await web3.eth.getAccounts();
+        const hasAddress = !!addresses[0];
 
-    async getCampaigns() {
-        const address = await web3.eth.getAccounts();
-        const hasAddress = !!address[0];
-        const addresses = await factory.methods.getDeployedCampaigns().call();
-        const campaigns = [];
-        for (let i = 0; i < addresses.length; i++) {
-            const campaign = campaignGetter(addresses[i]);
-            const campaignDetails = await campaign.methods.getSummary().call();
-            campaignDetails['7'] = addresses[i]
-            campaigns.push(campaignDetails);
-        };
-
-        this.setState({ ...this.state, campaigns, hasAddress });
+        this.setState({rinkeby, hasAddress });
     };
 
     render() {
@@ -53,13 +36,12 @@ class App extends Component {
                         path="/"
                         render={({match}) => <Home {...{
                             ...this.props,
-                            campaigns: this.state.campaigns,
                             factory,
                             web3,
-                            getCampaigns: this.getCampaigns.bind(this),
                             rinkeby: this.state.rinkeby,
                             hasAddress: this.state.hasAddress,
-                            match
+                            match,
+                            campaignGetter
                         }} />}
                     />
                     <Route
@@ -67,13 +49,12 @@ class App extends Component {
                         path="/new-campaign"
                         render={({match}) => <Home {...{
                             ...this.props,
-                            campaigns: this.state.campaigns,
                             factory,
                             web3,
-                            getCampaigns: this.getCampaigns.bind(this),
                             rinkeby: this.state.rinkeby,
                             hasAddress: this.state.hasAddress,
-                            match
+                            match,
+                            campaignGetter
                         }} />}
                     />
                     <Route
@@ -101,7 +82,7 @@ class App extends Component {
                     <Route path='/about' component={About} />
                     <Route
                         path='/rinkeby'
-                        render={(history) =>
+                        render={() =>
                             !this.state.rinkeby ?
                                 <div style={{ margin: '50px' }}>You're not on the Rinkeby network. Please switch to view the site!</div>
                                 :

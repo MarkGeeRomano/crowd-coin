@@ -36,5 +36,6 @@ module.exports = {
         loader: 'style-loader!css-loader?modules=true&localIdentName=[name]__[local]__[hash:base64:5]',
       }
     ]
-  }
+  },
+  devtool: 'source-map'
 };

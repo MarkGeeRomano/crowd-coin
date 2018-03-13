@@ -49,7 +49,7 @@ class Campaign extends Component {
     makeCards() {
         return this.makeContent().map((item, i) =>
             <Fade key={item.title}>
-                <div style={i == 3 ? { zIndex: 1 } : {}} className={styles.card} >
+                <div style={i == 3 ||i == 1  ? { zIndex: 1 } : {}} className={styles.card} >
                     <div className={styles.title}>{item.title.toUpperCase()}</div>
                     <div
                         style={item.isDescAdd ? { fontSize: '15px', color: '#18bdc3' } : null}
@@ -105,7 +105,7 @@ class Campaign extends Component {
             },
             {
                 title: 'address of manager 👩‍⚖️',
-                value: manager,
+                value: createUrl(manager),
                 description: "The creator of this campaign. They're able to create and finalize requests for campaign",
                 isDescAdd: true
             },
@@ -135,6 +135,10 @@ class Campaign extends Component {
             }
         ]
     };
+};
+
+function createUrl(address) {
+    return <a target="_blank" href={'https://rinkeby.etherscan.io/address/' + address}>{address}📫</a>;
 };
 
 export default isRinkeby(Campaign);

@@ -13,12 +13,10 @@ const Header = () => {
               <h1>Crowd<div className={styles.ether}></div>Coin</h1>
             </div>
           </Link>
-        {/* </Fade> */}
         <div className={styles.submenuContainer}>
-          {/* <Fade top duration={1250}> */}
             <Link to='/new-campaign'><div className={styles.submenuItem}>Create New Campaign 📮</div></Link>
             <Link to='/about'><div className={styles.submenuItem}> About 📖</div></Link>
-            <a href='https://github.com/MarkGeeRomano/crowd-coin'>
+            <a target="_blank" href='https://github.com/MarkGeeRomano/crowd-coin'>
               <div className={styles.submenuItemLast}>
                 Github <div className={styles.github}></div>
               </div>

@@ -24,11 +24,11 @@ class RequestRow extends Component {
         } = this.props;
 
         return (
-            <tr>
+            <tr style={approved ? { backgroundColor: '#c9c9c9', color: '#a7a7a7' } : {}}>
                 <td>{this.props.id}</td>
                 <td>{description}</td>
-                <td>{this.props.web3.utils.fromWei(value,'ether')}<div className='ether-denom'></div></td>
-                <td style={{ fontSize: '13px' }}>{recipient} 📬</td>
+                <td>{this.props.web3.utils.fromWei(value, 'ether')}<div className='ether-denom'></div></td>
+                <td style={{ fontSize: '13px' }}>{createUrl(recipient)}</td>
                 <td>{approvalCount} / {approversCount}</td>
                 <ApproveFinalizeBtn
                     manager={manager}
@@ -43,6 +43,10 @@ class RequestRow extends Component {
             </tr>
         )
     };
+};
+
+function createUrl(address) {
+    return <a target="_blank" href={'https://rinkeby.etherscan.io/address/' + address}>{address}📫</a>;
 };
 
 export default RequestRow;
