@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import campaignGetter from '../../ethereum/Campaign';
 import isRinkeby from './isRinkeby';
+import { Fade } from 'react-reveal';
 
 import styles from '../styles/requests.css'
 import Modal from 'react-modal';
@@ -118,50 +119,52 @@ class Requests extends Component {
             <div className={styles.container}>
                 <div className={styles.headerContainer}>
                     <Link to={`/campaigns/${this.props.id}`}>
-                        <button>⬅️ Go back to campaign</button>
+                        <button>Go back to campaign</button>
                     </Link>
-                    <button onClick={this.openModal.bind(this)}>
-                        Create New Request ✏️
-                    </button>
+                    {this.state.manager && <button onClick={this.openModal.bind(this)}>Create New Request ✏️</button>}
                 </div>
                 <div className={styles.tableContainer}>
                     {this.state.requests.length || this.state.addingRow ?
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Description</th>
-                                    <th>Amount</th>
-                                    <th>Recipient</th>
-                                    <th>Approvals</th>
-                                    <th>Approve</th>
-                                    <th>Finalize</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.makeRows()}
-                                {this.state.addingRow &&
+                        <Fade>
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td><div className='loader loaderRow'></div></td>
-                                        <td><div className='loader loaderRow'></div></td>
-                                        <td><div className='loader loaderRow'></div></td>
-                                        <td><div className='loader loaderRow'></div></td>
-                                        <td><div className='loader loaderRow'></div></td>
-                                        <td><div className='loader loaderRow'></div></td>
-                                        <td><div className='loader loaderRow'></div></td>
-                                    </tr>}
-                            </tbody>
-                        </table>
+                                        <th>ID</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Recipient</th>
+                                        <th>Approvals</th>
+                                        <th>Approve</th>
+                                        <th>Finalize</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.makeRows()}
+                                    {this.state.addingRow &&
+                                        <Fade bottom>
+                                            <tr>
+                                                <td><div className='loader loaderRow'></div></td>
+                                                <td><div className='loader loaderRow'></div></td>
+                                                <td><div className='loader loaderRow'></div></td>
+                                                <td><div className='loader loaderRow'></div></td>
+                                                <td><div className='loader loaderRow'></div></td>
+                                                <td><div className='loader loaderRow'></div></td>
+                                                <td><div className='loader loaderRow'></div></td>
+                                            </tr>
+                                        </Fade>}
+                                </tbody>
+                            </table>
+                        </Fade>
                         : this.state.loadingReqs ?
-                        <div style={{ marginTop: '20px' }}>loading requests....</div>
-                        :
-                        <div style={{ marginTop: '20px' }}>
-                            No requests yet
+                            <div style={{ marginTop: '20px' }}>loading requests....</div>
+                            :
+                            <div style={{ marginTop: '20px' }}>
+                                No requests yet
                                 {this.state.manager &&
                                     <span> ....but since you're the manager, you can
                                         <a onClick={this.openModal.bind(this)}> make one 😏</a>
                                     </span>}
-                        </div>}
+                            </div>}
                 </div>
                 <RequestModal
                     modalIsOpen={this.state.modalIsOpen}

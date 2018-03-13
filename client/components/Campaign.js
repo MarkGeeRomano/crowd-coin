@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import campaignGetter from '../../ethereum/Campaign';
 import web3 from '../../ethereum/web3';
 import isRinkeby from './isRinkeby';
+import { Fade } from 'react-reveal';
 
 import styles from '../styles/campaign.css';
 
@@ -26,8 +27,13 @@ class Campaign extends Component {
     };
 
     async componentDidMount() {
+        await this.getCampaign();
+    };
+
+    async getCampaign() {
         const campaign = await campaignGetter(this.props.id);
         const campaignMeta = await campaign.methods.getSummary().call();
+
         this.setState({
             minContribution: campaignMeta[0],
             balance: campaignMeta[1],
@@ -42,21 +48,22 @@ class Campaign extends Component {
 
     makeCards() {
         return this.makeContent().map((item, i) =>
-            <div style={i ==3 ? {zIndex:1} : {}}className={styles.card} key={item.title}>
-                <div className={styles.title}>{item.title.toUpperCase()}</div>
-                <div
-                    style={item.isDescAdd ? { fontSize: '15px', color: '#18bdc3' } : null}
-                    className={styles.value}>
-                    {item.value}
+            <Fade key={item.title}>
+                <div style={i == 3 ? { zIndex: 1 } : {}} className={styles.card} >
+                    <div className={styles.title}>{item.title.toUpperCase()}</div>
+                    <div
+                        style={item.isDescAdd ? { fontSize: '15px', color: '#18bdc3' } : null}
+                        className={styles.value}>
+                        {item.value}
+                    </div>
+                    <div className={styles.description}>{item.description}</div>
+                    {item.link}
                 </div>
-                <div className={styles.description}>{item.description}</div>
-                {item.link}
-            </div>
+            </Fade>
         );
     };
 
     render() {
-        console.log('rendering')
         return (
             <div className={styles.container}>
                 <div className={styles.donateContainer}>
@@ -64,6 +71,8 @@ class Campaign extends Component {
                         minContribution={this.state.minContribution}
                         campaign={this.state.campaign}
                         web3={this.props.web3}
+                        hasAddress={this.props.hasAddress}
+                        getCampaign={this.getCampaign.bind(this)}
                     />
                 </div>
                 <div className={styles.summaryContainer}>
@@ -121,7 +130,7 @@ class Campaign extends Component {
             },
             {
                 title: 'Min. contribution for vote 💸',
-                value: this.props.web3.utils.fromWei(minContribution, 'ether') + ' (ETH)',
+                value: <div>{this.props.web3.utils.fromWei(minContribution)}<div className='ether-denom-lrg'></div></div>,
                 description: 'The amount needed to contribute to gain voting rights',
             }
         ]

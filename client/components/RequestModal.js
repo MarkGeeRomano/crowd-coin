@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-
+import { Fade } from 'react-reveal';
 import styles from '../styles/requestModal.css';
 
 const customStyles = {
@@ -77,7 +77,6 @@ class RequestModal extends Component {
             recipient = '';
             value = '';
         } catch (err) {
-            console.log(`err:`,err)
             error = true;
             msg = err.message.length > 500 ? 'Rejected transaction!' : err.message;
             this.props.openModal();
@@ -104,6 +103,7 @@ class RequestModal extends Component {
                 style={customStyles}
                 appElement={document.body}
             >
+            <Fade>
                 <div
                     onClick={this.props.closeModal}
                     className={styles.closeButton}
@@ -121,7 +121,7 @@ class RequestModal extends Component {
                                 <input className={styles.recipient} onChange={this.recipientOnChange.bind(this)} />
                             </div>
                             <div>
-                                <label>Request value (eth)</label>
+                                <label>Request value <div className='ether-denom'></div></label>
                                 <input onChange={this.valueOnChange.bind(this)} />
                             </div>
                         </div>
@@ -129,6 +129,7 @@ class RequestModal extends Component {
                     </form>
                     {this.state.msg && <div className='msgBox error'> {this.state.msg} </div>}
                 </div>
+                </Fade>
             </Modal>
         );
     };

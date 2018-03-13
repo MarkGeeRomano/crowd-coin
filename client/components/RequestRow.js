@@ -22,12 +22,12 @@ class RequestRow extends Component {
             approversCount,
             getRequests
         } = this.props;
-        console.log(`rerow:`,getRequests)
+
         return (
             <tr>
                 <td>{this.props.id}</td>
                 <td>{description}</td>
-                <td>{this.props.web3.utils.fromWei(value,'ether')}</td>
+                <td>{this.props.web3.utils.fromWei(value,'ether')}<div className='ether-denom'></div></td>
                 <td style={{ fontSize: '13px' }}>{recipient} 📬</td>
                 <td>{approvalCount} / {approversCount}</td>
                 <ApproveFinalizeBtn

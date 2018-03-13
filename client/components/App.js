@@ -10,21 +10,27 @@ import Header from './Header';
 import Campaign from './Campaign';
 import Requests from './Requests';
 import About from './About';
+import Test from './Test';
 
 class App extends Component {
     state = {
         campaigns: [],
-        rinkeby: true
+        rinkeby: true,
+        hasAddress: true
     };
 
     async componentDidMount() {
         if (await web3.eth.net.getNetworkType() != 'rinkeby') {
             return this.setState({ rinkeby: false });
         }
-        this.getCampaigns();
+        const address = await web3.eth.getAccounts();
+        const hasAddress = !!address[0];
+    
     };
 
     async getCampaigns() {
+        const address = await web3.eth.getAccounts();
+        const hasAddress = !!address[0];
         const addresses = await factory.methods.getDeployedCampaigns().call();
         const campaigns = [];
         for (let i = 0; i < addresses.length; i++) {
@@ -34,7 +40,7 @@ class App extends Component {
             campaigns.push(campaignDetails);
         };
 
-        this.setState({ campaigns });
+        this.setState({ ...this.state, campaigns, hasAddress });
     };
 
     render() {
@@ -45,24 +51,29 @@ class App extends Component {
                     <Route
                         exact
                         path="/"
-                        render={() => <Home
-                            {...this.props}
-                            campaigns={this.state.campaigns}
-                            factory={factory}
-                            web3={web3}
-                            getCampaigns={this.getCampaigns.bind(this)}
-                            rinkeby={this.state.rinkeby}
-                        />}
-                    />
-                    <Route
-                        path="/new-campaign"
-                        render={(history) => <NewCampaign {...{
+                        render={({match}) => <Home {...{
                             ...this.props,
+                            campaigns: this.state.campaigns,
                             factory,
                             web3,
                             getCampaigns: this.getCampaigns.bind(this),
+                            rinkeby: this.state.rinkeby,
+                            hasAddress: this.state.hasAddress,
+                            match
+                        }} />}
+                    />
+                    <Route
+                        exact
+                        path="/new-campaign"
+                        render={({match}) => <Home {...{
+                            ...this.props,
                             campaigns: this.state.campaigns,
-                            rinkeby: this.state.rinkeby
+                            factory,
+                            web3,
+                            getCampaigns: this.getCampaigns.bind(this),
+                            rinkeby: this.state.rinkeby,
+                            hasAddress: this.state.hasAddress,
+                            match
                         }} />}
                     />
                     <Route
@@ -72,7 +83,8 @@ class App extends Component {
                             ...this.props,
                             ...params,
                             web3,
-                            rinkeby: this.state.rinkeby
+                            rinkeby: this.state.rinkeby,
+                            hasAddress: this.state.hasAddress
                         }} />}
                     />
                     <Route
@@ -86,16 +98,17 @@ class App extends Component {
                             rinkeby: this.state.rinkeby
                         }} />}
                     />
-                    <Route path='/about' component={About}/>
+                    <Route path='/about' component={About} />
                     <Route
                         path='/rinkeby'
                         render={(history) =>
-                         !this.state.rinkeby ?
-                            <div style={{ margin: '50px' }}>You're not on the Rinkeby network. Please switch to view the site!</div>
-                            :
-                            <Redirect to='/'/>
+                            !this.state.rinkeby ?
+                                <div style={{ margin: '50px' }}>You're not on the Rinkeby network. Please switch to view the site!</div>
+                                :
+                                <Redirect to='/' />
                         }
                     />
+                    <Route path='/test' render={()=><Test/>}/>
                     <Route render={() => <div style={{ margin: '50px' }}>404 nothing here homie</div>} />
                 </Switch>
             </div>

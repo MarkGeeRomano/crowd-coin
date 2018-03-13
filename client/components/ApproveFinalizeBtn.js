@@ -55,14 +55,15 @@ class ApproveFinalizeBtn extends Component {
             finalizedLoading
         } = this.props;
 
+
         return (
             <Fragment>
-                <td className={styles.buttonStyle} onClick={this.onApprove.bind(this)}>
+                <td style={{ backgroundColor: this.state.approved ? '#e2ffe2' : 'none'}} className={styles.buttonStyle} onClick={this.onApprove.bind(this)}>
                     {(this.state.approvedLoading && <div className='loader loaderAppFin'></div>)
                         ||
                         (approver ? (this.state.approved ? 'Approved ✅' : 'Approve 🗳') : "Can't Approve ❌ ")}
                 </td>
-                <td className={styles.buttonStyle} onClick={this.onFinalize.bind(this)}>
+                <td style={{ backgroundColor: this.state.finalized ? '#e2ffe2' : 'none'}} className={styles.buttonStyle} onClick={this.onFinalize.bind(this)}>
                     {(this.state.finalizedLoading && <div className='loader loaderAppFin'></div>)
                         ||
                         (manager ? (this.state.finalized ? 'Finalized ✅' : 'Finalize ✍️ ') : "Can't Finalize ❌ ")}

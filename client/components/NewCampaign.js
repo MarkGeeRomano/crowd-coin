@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Fade, SpecialFade } from 'react-reveal';
+import factory from '../../ethereum/factory';
 
 import styles from '../styles/newCampaign.css'
-import factory from '../../ethereum/factory';
 
 class NewCampaign extends Component {
     state = {
@@ -13,7 +14,7 @@ class NewCampaign extends Component {
         error: false,
         loading: false
     };
-
+ 
     async onSubmit(e) {
         e.preventDefault();
         let {
@@ -34,10 +35,10 @@ class NewCampaign extends Component {
 
             const accounts = await this.props.web3.eth.getAccounts();
             await factory.methods.createCampaign(
-                    this.props.web3.utils.toWei(minimum, 'ether'),
-                    name,
-                    description
-                ).send({ from: accounts[0] });
+                this.props.web3.utils.toWei(minimum, 'ether'),
+                name,
+                description
+            ).send({ from: accounts[0] });
 
             minimum = '';
             name = '';
@@ -63,51 +64,62 @@ class NewCampaign extends Component {
 
     render() {
         return (
-            <div className={styles.container}>
-                <h3>Create a Campaign 📮</h3>
-                <form autoComplete='off' onSubmit={this.onSubmit.bind(this)}>
-                    <div className={styles.fieldContainer}>
-                        <div className={styles.inputContainer}>
-
-                            <div>
-                                <label htmlFor='name'>Name of campaign</label>
-                                <br />
-                                <input
-                                    value={this.state.name}
-                                    className={styles.name}
-                                    id='name'
-                                    onChange={this.onChangeName.bind(this)}
-                                />
-                            </div>
-                        </div>
-                        <div className={styles.inputContainer}>
-                            <div>
-                                <label htmlFor='min-contribution'>Min. Contribution (Eth)</label>
-                                <br />
-                                <input
-                                    value={this.state.minimum}
-                                    id='min-contribution'
-                                    onChange={this.onChangeContribution.bind(this)}
-                                />
-                            </div>
-                        </div>
-                    </div>
+            <Fade duration={1500}>
+                <div className={styles.container}>
                     <div>
-                        <label htmlFor='description'>Description of campaign</label>
-                        <textarea
-                            value={this.state.description}
-                            rows='4'
-                            id='description'
-                            onChange={this.onChangeDescription.bind(this)}
-                        />
+                        <h3>Create a Campaign 📮</h3>
+                        <form autoComplete='off' onSubmit={this.onSubmit.bind(this)}>
+                            <div className={styles.fieldContainer}>
+                                <div className={styles.inputContainer}>
+                                    <div>
+                                        <label htmlFor='name'>Name of campaign</label>
+                                        <br />
+                                        <input
+                                            value={this.state.name}
+                                            className={styles.name}
+                                            id='name'
+                                            onChange={this.onChangeName.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                                <div className={styles.inputContainer}>
+                                    <div>
+                                        <label htmlFor='min-contribution'>Min. Contribution</label>
+                                        <div className='ether-denom'></div>
+                                        <br />
+                                        <input
+                                            value={this.state.minimum}
+                                            id='min-contribution'
+                                            onChange={this.onChangeContribution.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor='description'>Description of campaign</label>
+                                <textarea
+                                    value={this.state.description}
+                                    rows='4'
+                                    id='description'
+                                    onChange={this.onChangeDescription.bind(this)}
+                                />
+                            </div>
+                            <button >{this.state.loading ? <div className='loader'></div> : 'Create Campaign'}</button>
+                            {this.state.msg &&
+                                <div className={this.state.error ? 'msgBox error' : 'msgBox success'}>
+                                    {this.state.msg}
+                                </div>}
+                        </form>
                     </div>
-                    <button >{this.state.loading ? <div className='loader'></div> : 'Create Campaign'}</button>
-                    {this.state.msg &&
-                        <div className={this.state.error ? 'msgBox error' : 'msgBox success'}>
-                            {this.state.msg}
-                        </div>}
-                </form>
-            </div>
+                    {!this.props.hasAddress &&
+                        <SpecialFade duration={1500}>
+                            <div className='mask'>
+                                <p>You need to either login to Metamask or <a target="_blank" href='https://metamask.io/'>install</a> it to create a campaign 🦊</p>
+                            </div>
+                        </SpecialFade>
+                    }
+                </div>
+            </Fade>
         );
     };
 

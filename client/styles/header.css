@@ -46,11 +46,21 @@
 .submenuItem {
     border-right: 1.5px solid var(--myBlack);
     padding: 0 16px;
+    transition: .25s all ease-out;
+}
+
+.submenuItem:hover {
+    color: #005dff;
 }
 
 .submenuItemLast {
     border-right: none;
     padding-left: 16px;
+    transition: .25s all ease-out;
+}
+
+.submenuItemLast:hover {
+    color: #005dff;
 }
 
 .github{

@@ -26,6 +26,7 @@
 }
 
 .cardsContainer {
+    text-align: center;
     vertical-align: top;
     display: flex;
     height: 100%;
@@ -36,7 +37,6 @@
 }
 
 .card {
-    font-weight: bold;
     margin-bottom: 25px;
     border: 0.5px solid var(--boxGrey);
     font-size: 20px;
@@ -49,7 +49,7 @@
 }
 
 .card > div {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     width: 80%;
 }
 
@@ -88,6 +88,11 @@
     margin: auto 0;
     width: 100%;
     text-align: center;
+    transition: .25s all ease-out;
+}
+
+.cardsContainer a div:hover {
+    background-color: #7BA3DD;
 }
 
 .inbetween {
