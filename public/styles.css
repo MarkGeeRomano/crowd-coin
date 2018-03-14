@@ -44,13 +44,13 @@ button {
     letter-spacing: 1.5px;
     color: white;
     box-shadow: var(--myBoxShadow);
-    padding: .5em 0;
+    padding: .5em;
     transition: .25s all ease-out;
 }
 
 button:hover {
     cursor: pointer;
-    background-color: #7BA3DD;
+    background-color: rgb(139, 162, 197);
 }
 
 .loader {

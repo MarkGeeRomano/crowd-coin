@@ -58,7 +58,7 @@ class ContributeForm extends Component {
         e.preventDefault();
         this.setState({
             ...this.state,
-            height: this.state.height == 0 ? 'auto' : 0,
+            height: this.state.height == 0 ? '200px' : 0,
             arrow: this.state.arrow == String.fromCharCode(9660) ?
                 String.fromCharCode(9650)
                 :
@@ -79,19 +79,11 @@ class ContributeForm extends Component {
 
         return (
             <div className={styles.shell}>
-                <div
-                    className={styles.frameTop}
-                    onClick={this.toggle.bind(this)}
-                >
+                <div className={styles.frameTop} onClick={this.toggle.bind(this)}>
                     Donate to this Campaign
                 </div>
-                <AnimateHeight
-                    className={styles.animatorContainer}
-                    duration={500}
-                    height={height}
-                >
                     {hasAddress ?
-                        <div id='hi' className={styles.container}>
+                        <div style={{ maxHeight: this.state.height}} className={styles.container}>
                             <form autoComplete='off' onSubmit={this.onSubmit.bind(this)}>
                                 <label htmlFor='donate'>{web3.utils.fromWei(minContribution, 'ether')}<div className='ether-denom'></div>  to gain voting rights⚖️</label>
                                 <input id='donate' value={contribution} onChange={this.onChange.bind(this)} />
@@ -107,8 +99,6 @@ class ContributeForm extends Component {
                         <div>
                             <p>You need to either login to Metamask or <a target="_blank" href='https://metamask.io/'>install</a> it to contribute to a campaign 🦊</p>
                         </div>}
-                </AnimateHeight>
-
                 <div
                     className={styles.frameBottom}
                     onClick={this.toggle.bind(this)}

@@ -49,7 +49,7 @@ class Campaign extends Component {
     makeCards() {
         return this.makeContent().map((item, i) =>
             <Fade key={item.title}>
-                <div style={i == 3 ||i == 1  ? { zIndex: 1 } : {}} className={styles.card} >
+                <div className={styles.card} >
                     <div className={styles.title}>{item.title.toUpperCase()}</div>
                     <div
                         style={item.isDescAdd ? { fontSize: '15px', color: '#18bdc3' } : null}
@@ -66,7 +66,7 @@ class Campaign extends Component {
     render() {
         return (
             <div className={styles.container}>
-                <div className={styles.donateContainer}>
+                   <Link to='/'><button>Back To Campaigns</button></Link>
                     <ContributeForm
                         minContribution={this.state.minContribution}
                         campaign={this.state.campaign}
@@ -74,7 +74,6 @@ class Campaign extends Component {
                         hasAddress={this.props.hasAddress}
                         getCampaign={this.getCampaign.bind(this)}
                     />
-                </div>
                 <div className={styles.summaryContainer}>
                     <h2>Campaign Summary</h2>
                     <div className={styles.cardsContainer}>

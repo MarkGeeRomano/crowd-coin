@@ -1,4 +1,14 @@
+.container {
+    width: 100%;
+    margin-left: auto;
+    transition: 1s;
+    overflow: hidden;
+}
+
 .shell {
+    position: absolute;
+    left: 70%;
+    text-align: center;
     width: 24%;
     background-color: white;
     margin-top: 10px;
@@ -6,11 +16,11 @@
     margin-right: 3px;
     border: .5px solid var(--boxGrey);
     border-radius: calc(var(--myBoxRadius) - 5px);
+    cursor: pointer;
 }
 
 .frameTop {
     border-bottom: .5px solid var(--boxGrey);
-    padding: .5em 0;
 }
 
 .frameBottom {
@@ -21,10 +31,6 @@
     border-top: .5px solid var(--boxGrey);
 }
 
-.container {
-    width: 100%;
-    margin-left: auto;
-}
 
 .animatorContainer {
 

@@ -47,13 +47,13 @@ class App extends Component {
                     <Route
                         exact
                         path="/new-campaign"
-                        render={({match}) => <Home {...{
+                        render={({match : { path }}) => <Home {...{
                             ...this.props,
                             factory,
                             web3,
                             rinkeby: this.state.rinkeby,
                             hasAddress: this.state.hasAddress,
-                            match,
+                            path,
                             campaignGetter
                         }} />}
                     />
