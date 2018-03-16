@@ -1,55 +1,56 @@
 .closeButton  {
-    margin-left: 100%;
-    display: block;
-    font-size: 20px;
-    cursor: pointer;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  margin-left: 100%;
 }
 
 .container h2 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .container textarea {
-    width: 100%;
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .container form > div {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 .container form > div > div:first-child{
-    width: 60%;
+  width: 60%;
 }
+
 .container form > div > div{
-    width: 40%;
+  width: 40%;
 }
 
 .container form > div > div:first-child input{
-    width: 100%;
-    font-size: 14px;
-    padding-left: 5px;
+  font-size: 14px;
+  width: 100%;
+  padding-left: 5px;
 }
 
 .container form > div > div input{
-    width: 70%;
+  width: 70%;
 }
 .container form button {
-    width: 100%;
-    font-size: 14px;
-    letter-spacing: 3px;
-    height: 2.5em;
-    cursor: pointer;
-    margin-bottom: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 2.5em;
+  letter-spacing: 3px;
+  margin-bottom: 7px;
+  width: 100%;
 }
 
 
 
 
 .container label {
-    display:block;
+  display:block;
 }
 

@@ -1,159 +1,118 @@
-h1, h2, h3, textarea, body {
-    margin: 0;
+* { font-family: 'Source Sans Pro'}
+
+h1, h2, h3, textarea, body { margin: 0; }
+
+:root {
+  --boxGrey: #666;
+  --myBoxShadow: 3px 3px #f0f0f0;
+  --myBoxRadius: 20px;
+  --buttonBlue: #6093D5;
+  --buttonRadius: 10px;
+  --linkBlue: #08f;
+  --linkHoverBlue: #00d2ff;
 }
 
 a {
-    text-decoration: none;
-    color: #08f;
+  text-decoration: none;
+  color: var(--linkBlue);
+  transition: 250ms;
 }
 
-:root {
-    --myBlue: #5b6eb1;
-    --myBlack: #656969;
-    --myBlackLight: #4b4b4b;
-    --boxGrey: #666;
-    --myBoxShadow: 3px 3px #f0f0f0;
-    --myBoxRadius: 20px;
-    --myInputTextareaRadius: 5px;
-    --myInputTextareaBorder: .5px solid #CCCCCC;
-    --myInputTextareaColor: #626262;
-    --buttonBlue: #6093D5;
-    --buttonRadius: 10px;
+a:hover {
+  color: var(--linkHoverBlue);
 }
-
-* { font-family: 'Source Sans Pro'}
-
 
 #header + div { padding-top: 75px }
 
 textarea, input {
-    border: var(--myInputTextareaBorder);
-    border-radius: var(--myInputTextareaRadius);
-    resize: none;
-    color: var(--myInputTextareaColor);
-    font-size: 15px;
-    padding: 3px;
+  border: .5px solid #CCCCCC;
+  border-radius: 5px;
+  resize: none;
+  color: #626262;
+  font-size: 15px;
+  padding: 3px;
 }
 
 input { height: 2em; }
 
 button {
-    border: 1px solid;
-    border-radius: var(--buttonRadius);
-    background-color: var(--buttonBlue);
-    letter-spacing: 1.5px;
-    color: white;
-    box-shadow: var(--myBoxShadow);
-    padding: .5em;
-    transition: .25s all ease-out;
+  border: 1px solid;
+  border-radius: var(--buttonRadius);
+  background-color: var(--buttonBlue);
+  letter-spacing: 1.5px;
+  color: white;
+  box-shadow: var(--myBoxShadow);
+  padding: .5em;
+  transition: 250ms all ease-out;
 }
 
 button:hover {
-    cursor: pointer;
-    background-color: rgb(139, 162, 197);
+  cursor: pointer;
+  background-color: rgb(139, 162, 197);
 }
-
-.loader {
-    border: 5px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 5px solid #2738f3;
-    width: 15px;
-    height: 15px;
-    animation: spin .5s linear infinite;
-    margin: 0 auto;
-}
-
-.loaderSm {
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #2738f3;
-    width: 10px;
-    height: 10px;
-}
-
-.loaderRow {
-    border-top: 5px solid #8c8c8f;
-}
-
-.loaderAppFin {
-    border-top: 5px solid #3af327;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 
 .msgBox {
-    text-align: center;
-    padding: 1em 0;
-    border-radius: var(--buttonRadius);
+  text-align: center;
+  padding: 1em 0;
+  border-radius: var(--buttonRadius);
 }
 
 .error {
-    background-color: #feaaaa;
-    border: 1px solid #cb8686;
-    color: #c51d3b;
+  background-color: #feaaaa;
+  border: 1px solid #cb8686;
+  color: #c51d3b;
 }
 
 .success {
-    background-color: #a1ffa1;
-    border: 1px solid #65e165;
-    color: #599c4c;
+  background-color: #a1ffa1;
+  border: 1px solid #65e165;
+  color: #599c4c;
 }
 
 .sm {
-    width: 90%;
-    display: inline-block;
-    font-size: 12px;
+  width: 90%;
+  display: inline-block;
+  font-size: 12px;
 }
 
 .mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: grey;
-    opacity: .9;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  opacity: .9;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
 
 .mask p {
-    position: absolute;
-    top: 40%;
-    color: white;
-    text-align: center;
-    padding: 0 60px;
+  position: absolute;
+  top: 40%;
+  color: white;
+  text-align: center;
+  padding: 0 60px;
 }
 
 .mask a {
-    color: #ff9103
+  color: #ff9103
 }
 
-.fadez-enter {
-  opacity: 0.01;
-}
-
-.fadez-enter.fadez-enter-active {
-  opacity: 1;
-  transition: opacity 2000ms ease-in;
-}
 
 .ether-denom {
-    background-image:  url('/ether_icon2.png');
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background-size: contain;
-    background-repeat: no-repeat;
+  background-image:  url('/ether_icon2.png');
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .ether-denom-lrg {
-    background-image:  url('/ether_icon2.png');
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background-size: contain;
-    background-repeat: no-repeat;
+  background-image:  url('/ether_icon2.png');
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

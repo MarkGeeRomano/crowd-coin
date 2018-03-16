@@ -62,10 +62,10 @@ class ApproveFinalizeBtn extends Component {
     return (
       <Fragment>
         <td style={approvedContent.style} className={styles.buttonStyle} onClick={this.onApprove.bind(this)}>
-          {(this.state.approvedLoading && <div className='loader loaderAppFin'></div>) || approvedContent.text}
+          {(this.state.approvedLoading && <div className={styles.appFinloader}></div>) || approvedContent.text}
         </td>
         <td style={finalizedContent.style} className={styles.buttonStyle} onClick={this.onFinalize.bind(this)}>
-          {(this.state.finalizedLoading && <div className='loader loaderAppFin'></div>) || finalizedContent.text}
+          {(this.state.finalizedLoading && <div className={styles.appFinloader}></div>) || finalizedContent.text}
         </td>
       </Fragment>
     )

@@ -1,103 +1,102 @@
 .campaignContainer {
-    display: inline-block;
-    vertical-align: top;
-    width: 55%;
+  display: inline-block;
+  vertical-align: top;
+  width: 55%;
 }
 
 .campaignContainer h2 {
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 7px;
-    text-align: center;
-    letter-spacing: 5px;
+  font-weight: bold;
+  font-size: 25px;
+  letter-spacing: 5px;
+  margin-bottom: 7px;
+  text-align: center;
 }
 
 .campaignContainer > div {
-    display: flex;
-    width: 75%;
-    align-items: center;
-    flex-direction: column;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 75%;
 }
 
 .container {
-    min-height: 400px;
-    width: 85%;
-    margin: 30px auto 0;
+  margin: 30px auto 0;
+  min-height: 400px;
+  width: 85%;
 }
 
 .cardsContainer {
-    text-align: center;
-    vertical-align: top;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    justify-content: space-around;
-    flex-direction: column;
-    margin-right: auto;
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
+  vertical-align: top;
 }
 
 .card {
-    margin-bottom: 25px;
-    border: 0.5px solid var(--boxGrey);
-    font-size: 20px;
-    padding: 20px 0;
-    border-radius: var(--myBoxRadius);
-    box-shadow: var(--myBoxShadow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  align-items: center;
+  border: 0.5px solid var(--boxGrey);
+  border-radius: var(--myBoxRadius);
+  box-shadow: var(--myBoxShadow);
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  margin-bottom: 25px;
+  padding: 20px 0;
 }
 
 .card > div {
-    margin-bottom: 15px;
-    width: 80%;
+  margin-bottom: 15px;
+  width: 80%;
 }
 
 .card a div {
-    box-shadow: var(--myBoxShadow);
+  box-shadow: var(--myBoxShadow);
 }
 
 .address {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 .cardsContainer span {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .cardsContainer a {
-    font-weight: normal;
-    width: 80%;
-    margin-top: 15px;
+  font-weight: normal;
+  width: 80%;
+  margin-top: 15px;
 }
 
-
 .cardsContainer span {
-    color: var(--myBlackLight);
-    font-size: 16px;
+  color: var(--myBlackLight);
+  font-size: 16px;
 }
 
 .cardsContainer a div {
-    display: inline-block;
-    background-color: var(--buttonBlue);
-    border-radius: var(--buttonRadius);
-    color: white;
-    font-size: 15px;
-    letter-spacing: 1.5px;
-    padding: .5em 0;
-    margin: auto 0;
-    width: 100%;
-    text-align: center;
-    transition: .25s all ease-out;
+  background-color: var(--buttonBlue);
+  border-radius: var(--buttonRadius);
+  display: inline-block;
+  color: white;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  margin: auto 0;
+  padding: .5em 0;
+  text-align: center;
+  transition: .25s all ease-out;
+  width: 100%;
 }
 
 .cardsContainer a div:hover {
-    background-color: #7BA3DD;
+  background-color: #7BA3DD;
 }
 
 .inbetween {
-    display: inline-block;
-    width: 15%;
+  display: inline-block;
+  width: 15%;
 }
 
 

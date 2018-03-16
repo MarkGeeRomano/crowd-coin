@@ -8,34 +8,29 @@ module.exports = {
     './client/crowdCoin'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    // publicPath: '/static/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
   ],
   module: {
-    loaders: [
-      // js
+    rules: [
       {
         test: /\.js/,
-        loaders: ['babel'],
+        loader: ['babel-loader'],
         include: [path.join(__dirname, 'client'), path.join(__dirname, 'ethereum')]
       },
-      //json
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: ['json-loader'],
         include: path.join(__dirname),
       },
-      //css
       {
         test: /\.css/,
         loader: 'style-loader!css-loader?modules=true&localIdentName=[name]__[local]__[hash:base64:5]',
       }
     ]
-  },
-  devtool: 'source-map'
+  }
 };

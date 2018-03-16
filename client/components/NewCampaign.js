@@ -47,6 +47,7 @@ class NewCampaign extends Component {
       error: false;
       this.props.getCampaigns();
     } catch (err) {
+      console.log(`err`,err)
       error = true;
       msg = err.message.length > 500 ? 'Rejected transaction!' : err.message;
     };
@@ -105,7 +106,7 @@ class NewCampaign extends Component {
                     onChange={this.onChangeDescription.bind(this)}
                   />
                 </div>
-                <button >{this.state.loading ? <div className='loader'></div> : 'Create Campaign'}</button>
+                <button >{this.state.loading ? <div className={styles.loader}></div> : 'Create Campaign'}</button>
                 {this.state.msg &&
                   <div className={this.state.error ? 'msgBox error' : 'msgBox success'}>
                     {this.state.msg}

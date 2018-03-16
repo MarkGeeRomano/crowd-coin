@@ -1,84 +1,84 @@
 .container {
-    width: 100%;
-    border-bottom: 1px solid var(--myBlack);
-    height: 65px;
-    position: fixed;
-    top: 0;
-    background-color: white;
-    z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #4b4b4b;
+  height: 65px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .flexContainer {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    width: 85%;
-    height: 100%;
-    margin: 0 auto;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 85%;
 }
 
 .flexContainer a {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .flexContainer div {
-    color: var(--myBlue);
+  color: var(--linkBlue);
 }
 
 .flexContainer h1 {
-    color: #ffab00;
-    font-size: 36px;
-    font-weight: lighter;
+  color: #ffab00;
+  font-size: 36px;
+  font-weight: lighter;
 }
 
 .divider {
-    width: 1px solid var(--myBlack);
-    height: 100%;
+  width: 1px solid #4b4b4b;
+  height: 100%;
 }
 
 .submenuContainer {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 19px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  font-size: 19px;
+  margin-top: auto;
 }
 
 .submenuItem {
-    border-right: 1.5px solid var(--myBlack);
-    padding: 0 16px;
-    transition: .25s all ease-out;
+  border-right: 1px solid #4b4b4b;
+  padding: 0 16px;
+  transition: .25s all ease-out;
 }
 
 .submenuItem:hover {
-    color: #005dff;
+  color: var(--linkHoverBlue);
 }
 
 .submenuItemLast {
-    border-right: none;
-    padding-left: 16px;
-    transition: .25s all ease-out;
+  border-right: none;
+  padding-left: 16px;
+  transition: .25s all ease-out;
 }
 
 .submenuItemLast:hover {
-    color: #005dff;
+  color: var(--linkHoverBlue);
 }
 
 .github{
-    background-image:  url('/github_icon.svg');
-    display: inline-block;
-    width: 17px;
-    height: 17px;
-    background-size: contain;
-    background-repeat: no-repeat;
+  background-image:  url('/github_icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 17px;
+  width: 17px;
 }
 
 .ether{
-    background-image:  url('/ether_icon.png');
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
+  background-size: contain;
+  background-image:  url('/ether_icon.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
 }
 

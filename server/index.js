@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
-const port = process.env.NODE_ENV === 'development' ? 6969 : 4200;
-app.listen(port, () => console.log(`server listening at http://localhost:${port}`));
+const port = process.env.PORT || 6969;
+app.listen(port, () => console.log(`server listening at ${port}`));
 
 
