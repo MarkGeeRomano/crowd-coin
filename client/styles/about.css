@@ -1,0 +1,26 @@
+.container {
+    width: 85%;
+    display: block;
+    margin: 0 auto;
+}
+
+.container div {
+    margin-bottom: 30px;
+}
+
+.container h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.container h3 {
+    font-style: italic;
+}
+
+.container p {
+    line-height: 30px;
+}
+
+.cotainer i {
+    font-size: 14px;
+}

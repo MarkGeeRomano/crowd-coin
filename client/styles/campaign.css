@@ -1,41 +1,85 @@
-h2 {
-    margin: 0;
-}
 
 .container {
-    display: flex;
-    justify-content: space-around;
+  position: relative;
+  z-index: 0;
 }
 
+.container > a {
+  top: 15%;
+  left: 5%;
+  position: absolute;
+}
+
+.container h2 {
+  margin: 0;
+}
+
+
+.donateContainer {
+  cursor: pointer;
+  height: 35px;
+  margin: 0 auto;
+  text-align: center;
+  width: 85%;
+}
+
+
 .summaryContainer {
-    width: 50%;
-    text-align: center;
+  margin: 0 auto;
+  text-align: center;
+  width: 90%;
 }
 
 .cardsContainer {
-    max-height: 550px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 550px;
 }
 
 .card {
-    border: 1px solid black;
-    padding: 12px 0;
-    height: 125px;
-    margin: 15px;
-    width: 360px;
+  border: 1px solid var(--boxGrey);
+  border-radius: var(--myBoxRadius);
+  box-shadow: var(--myBoxShadow);
+  display: flex;
+  flex-direction: column;
+  height: 145px;
+  justify-content: space-between;
+  margin: 30px 5px;
+  padding: 12px 5px;
+  width: 360px;
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.card a div {
+  border: 1px solid #08f;
+  border-radius: 5px;
+  color: #08f;
+  display: inline-block;
+  padding: 3px 8px;
+}
+
+.card button {
+  cursor: pointer;
+  width: 90%;
 }
 
 .title {
-    font-size: 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .value {
-    font-size: 17px;
-    padding: 5px 0;
+  color:#18bdc3;
+  font-size: 30px;
+  text-decoration: none;
+  padding: 5px 0;
 }
 
-.description {
-    font-size: 14px;
+.description{
+  font-size: 12px;
 }
+

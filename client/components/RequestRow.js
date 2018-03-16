@@ -1,75 +1,54 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'semantic-ui-react';
 
 import ApproveFinalizeBtn from './ApproveFinalizeBtn';
 
 class RequestRow extends Component {
 
-    async onApprove() {
-        const { kampaign, web3 } = this.props;
-        this.setState({ ...this.state, loading: true });
+  render() {
+    const {
+      request: {
+        description,
+        value,
+        recipient,
+        approvalCount,
+        complete,
+        approved
+      },
+      manager,
+      approver,
+      campaign,
+      id,
+      web3,
+      approversCount,
+      getRequests
+    } = this.props;
 
-        const accounts = await web3.eth.getAccounts();
-        let error;
-        try {
-            await kampaign.methods.approveRequest(this.props.id)
-                .send({ from: accounts[0] });
-        } catch (e) {
+    return (
+      <tr style={complete ? { backgroundColor: '#c9c9c9', color: '#a7a7a7' } : {}}>
+        <td>{this.props.id}</td>
+        <td>{description}</td>
+        <td>{this.props.web3.utils.fromWei(value, 'ether')}<div className='ether-denom'></div></td>
+        <td style={{ fontSize: '13px' }}>{createUrl(recipient, complete)}</td>
+        <td>{complete ? '-' : `${approvalCount}/${approversCount}`}</td>
+        <ApproveFinalizeBtn
+          manager={manager}
+          approver={approver}
+          campaign={campaign}
+          web3={web3}
+          complete={complete}
+          id={id}
+          approved={approved}
+          getRequests={getRequests}
+          approversCount={approversCount}
+          approvalCount={approvalCount}
+        />
+      </tr>
+    )
+  };
+};
 
-        };
-        this.setState({ ...state, loading: false });
-    };
-
-    async onFinalize() {
-        const { kampaign, web3 } = this.props;
-        this.setState({ ...state, loading: true });
-
-        const accounts = web3.eth.getAccounts();
-        let error;
-        try {
-            await kampaign.methods.finalizeRequest(this.props.id)
-                .send({ from: accounts[0] });
-        } catch (e) {
-
-        };
-        this.setState({ ...state, loading: false });
-    };
-
-    render() {
-        const { Row, Cell } = Table;
-        const {
-            description,
-            value,
-            recipient,
-            approvalCount,
-        } = this.props.request;
-        const {
-            approvers,
-            web3,
-            id,
-            updateRequestData,
-            kampaign,
-            request
-        } = this.props;
-
-        return (
-            <Row>
-                <Cell>{this.props.id}</Cell>
-                <Cell>{description}</Cell>
-                <Cell textAlign='center'>{this.props.web3.utils.fromWei(value, 'ether')}</Cell>
-                <Cell textAlign='center'>{recipient}</Cell>
-                <Cell textAlign='center'>{approvalCount + '/' + this.props.approvers}</Cell>
-                <ApproveFinalizeBtn
-                    onApprove={this.onApprove.bind(this)}
-                    updateRequestData={updateRequestData}
-                    kampaign={kampaign}
-                    web3={web3}
-                    id={id}
-                    request={request}
-                />
-            </Row>
-        )
-    };
+function createUrl(address, complete) {
+  return <a style={complete ? { color: 'rgb(130, 161, 192)' } : {}} target="_blank" href={'https://rinkeby.etherscan.io/address/' + address}>{complete ? null : '📫'}{address}</a>;
 };
 
 export default RequestRow;

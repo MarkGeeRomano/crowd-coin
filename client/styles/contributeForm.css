@@ -1,3 +1,72 @@
 .container {
-    width: 15%;
+  width: 100%;
+  margin-left: auto;
+  transition: 1s;
+  overflow: hidden;
+}
+
+.container > div {
+  font-style: italic;
+}
+
+.container label {
+  display: block;
+  font-size: 13px;
+  padding: 1em 0 .5em 0;
+}
+
+.container form {
+  padding-bottom: 5px;
+}
+
+.container input {
+  height: 1em;
+  width: 38%;
+}
+
+.container button {
+  width: 90%;
+  padding: .5em;
+  margin: 9px 0 6px 0;
+}
+
+.shell {
+  position: absolute;
+  left: 70%;
+  text-align: center;
+  width: 24%;
+  background-color: white;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: 3px;
+  border: .5px solid var(--boxGrey);
+  border-radius: calc(var(--myBoxRadius) - 5px);
+  cursor: pointer;
+}
+
+.frameTop {
+  border-bottom: .5px solid var(--boxGrey);
+}
+
+.frameBottom {
+  height: 20px;
+  color:#1b6cb0;
+  display: inline-block;
+  width: 100%;
+  border-top: .5px solid var(--boxGrey);
+}
+
+.loader {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #2738f3;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: spin .5s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

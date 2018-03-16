@@ -1,32 +1,90 @@
-textarea {
-    width: 100%;
-    margin-bottom: 20px;
+.container {
+  border-radius: var(--myBoxRadius);
+  box-shadow: var(--myBoxShadow);
+  display: inline-block;
+  margin-left: 15px;
+  margin-top: 37px;
+  position: fixed;
+  width: 35%;
 }
 
-label {
+.container > div {
+  background-color: white;
+  border: .5px solid var(--boxGrey);
+  border-radius: var(--myBoxRadius);
+  padding: 20px 20px 5px 20px;
+  transition: 1s;
 }
 
-input {
-    width: 20%;
-    margin-bottom: 20px;
+.blink {
+-webkit-animation: blink .5s step-end 6 alternate;
+  animation: blink .5s step-end 6 alternate;
 }
 
-button {
-    width: 100%;
-    height: 3em;
+@-webkit-keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: .1; }
+  100% { opacity: 1; }
+}
+
+@keyframes blink {
+50% {
+      border: 1.5px solid rgb(241, 175, 50);
+      padding: 19px 19px 4px 19px;
+    }
+}
+
+.container h3 { margin-bottom: 15px }
+
+.container textarea {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.container button {
+  font-size: 15px;
+  height: 3em;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .campaignForm {
-    justify-content: space-around;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 
-.container {
-    height: 100%;
-    display: inline-block;
-    width: 20%;
-    margin-right: 55px;
-    position: fixed;
+.fieldContainer {
+  display: flex;
+  justify-content: space-between;
 }
+
+.inputContainer {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 45%;
+}
+
+.inputContainer input {
+  width: 100%;
+  height: 1.5em;
+}
+
+.loader {
+  animation: spin .5s linear infinite;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #2738f3;
+  height: 15px;
+  margin: 0 auto;
+  width: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+

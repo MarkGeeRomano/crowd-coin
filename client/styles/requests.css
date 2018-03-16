@@ -1,0 +1,103 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+}
+
+.container button, a {
+  cursor: pointer;
+}
+
+.headerContainer {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 35px 0;
+  width: 85%;
+}
+
+.headerContainer > div {
+  border: 1px solid #08f;
+  border-radius: var(--buttonRadius);
+  padding: 5px;
+}
+
+.headerContainer span {
+  font-size: 30px;
+}
+
+.headerContainer span + div {
+  display: inline-block;
+}
+
+.headerContainer button {
+  font-size: 14px;
+  height: 2.5em;
+  padding: 0 5px;
+}
+
+.tableContainer {
+  width: 85%;
+}
+
+.tableContainer h3 {
+  margin-bottom: 10px;
+}
+
+.tableContainer table {
+  border-spacing: 0.25rem;
+  text-align: center;
+  width: 100%;
+}
+
+.tableContainer td, th {
+  border: 1px solid var(--boxGrey);
+  border-radius: 2px;
+  min-width: 50px;
+}
+
+.tableContainer th {
+  border: none;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  padding: 0 8px;
+}
+
+.tableContainer td {
+  height: 3em;
+}
+
+.tableContainer th:nth-child(2) {
+   min-width: 400px;
+}
+
+.buttonStyle {
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #898a8d;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  animation: spin .5s linear infinite;
+  margin: 0 auto;
+}
+
+.appFinloader{
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3af327;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  animation: spin .5s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

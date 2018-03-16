@@ -1,28 +1,32 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Fade } from 'react-reveal';
+import styles from '../styles/header.css'
 
-const fontStyle = { fontWeight: 'bold', fontSize: '20px' };
-const Header = ({ history }) => {
-    return (
-        <Menu secondary>
-            <Menu.Menu position='left'>
-                <Link to='/'>
-                    <Menu.Item style={fontStyle}>
-                        Crowd Coin
-                    </Menu.Item>
-                </Link>
-            </Menu.Menu>
-            <Menu.Menu position='right'>
-                <Link to="/new-campaign" >
-                    <Menu.Item style={fontStyle}>
-                        Add campaign +
-                    </Menu.Item>
-                </Link>
-            </Menu.Menu>
-        </Menu>
-    )
+const Header = () => {
+  return (
+    <div id='header' className={styles.container}>
+      <div className={styles.flexContainer}>
+        <Fade top duration={1000}>
+          <Link to='/'>
+            <div >
+              <h1>Crowd<div className={styles.ether}></div>Coin</h1>
+            </div>
+          </Link>
+        <div className={styles.submenuContainer}>
+            <Link to='/new-campaign'><div className={styles.submenuItem}>Create New Campaign 📮</div></Link>
+            <Link to='/about'><div className={styles.submenuItem}> About 📖</div></Link>
+            <a target="_blank" href='https://github.com/MarkGeeRomano/crowd-coin'>
+              <div className={styles.submenuItemLast}>
+                Github <div className={styles.github}></div>
+              </div>
+            </a>
+        </div>
+          </Fade>
+      </div>
+    </div>
+  );
 };
 
-export default withRouter(Header);
+export default Header;
 

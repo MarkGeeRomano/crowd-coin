@@ -1,115 +1,100 @@
-import React, { Component } from 'react';
-import { Button, Table } from 'semantic-ui-react';
+import React, { Component, Fragment } from 'react';
+import styles from '../styles/requests.css';
 
 class ApproveFinalizeBtn extends Component {
-    state = {
-        isApprover: true,
-        isManager: true,
-        approved: false,
-        finalized: false,
-        approvedLoading: true,
-        finalizedLoading: true,
+  state = {
+    approved: this.props.approved,
+    finalized: this.props.complete,
+    approvedLoading: false,
+    finalizedLoading: false,
+  };
+
+  async onApprove() {
+    if (!this.props.approver || this.props.approved) { return; };
+    const { campaign, web3, id } = this.props;
+    this.setState({ ...this.state, approvedLoading: true });
+
+    let approved;
+    const accounts = await web3.eth.getAccounts();
+    try {
+      await campaign.methods.approveRequest(id).send({ from: accounts[0] });
+      approved = true;
+    } catch (err) {
+      approved = false;
+      console.log(err.msg);
     };
+    await this.props.getRequests();
+    this.setState({ ...this.state, approvedLoading: false, approved });
+  };
 
-    async componentDidMount() {
-        const { kampaign, web3, id, request } = this.props;
-        const accounts = await web3.eth.getAccounts();
-        const isApprover = await kampaign.methods.approvers(accounts[0]).call();
-        const approved = await kampaign.methods.approved(id)
-        const manager = await kampaign.methods.manager().call();
-        this.setState({
-            ...this.state,
-            approvedLoading: false,
-            finalizedLoading: false,
-            approved,
-            isApprover,
-            finalized: request.complete,
-            isManager: accounts[0] == manager
-        });
+  async onFinalize() {
+    if (!this.props.manager || this.props.complete) { return; };
+    const { campaign, web3, id } = this.props;
+    this.setState({ ...this.state, finalizedLoading: true });
+
+    let finalized;
+    const accounts = await web3.eth.getAccounts();
+    try {
+      await campaign.methods.finalizeRequest(id).send({ from: accounts[0] });
+      finalized = true;
+    } catch (err) {
+      finalized = false;
+      console.log(err.msg || err);
     };
+    await this.props.getRequests();
+    this.setState({ ...this.state, finalizedLoading: false, finalized });
+  };
 
-    async onApprove() {
-        if (!this.state.isApprover || this.state.approved) return;
-        const { kampaign, web3, id } = this.props;
-        this.setState({ ...this.state, approvedLoading: true });
+  render() {
+    const {
+      approver,
+      manager,
+      approved,
+      complete,
+      approvedLoading,
+      finalizedLoading,
+      approversCount,
+      approvalCount
+    } = this.props;
 
-        const accounts = await web3.eth.getAccounts();
-        let approved = false;
-        try {
-            await kampaign.methods.approve(id)
-                .send({ from: accounts[0] });
-            approved = await kampaign.methods.approved(id);
-        } catch(e) {
+    const approvedContent = approveContent(approver, approved, complete);
+    const finalizedContent = finalizeContent(approvalCount, approversCount, complete, manager);
+    return (
+      <Fragment>
+        <td style={approvedContent.style} className={styles.buttonStyle} onClick={this.onApprove.bind(this)}>
+          {(this.state.approvedLoading && <div className={styles.appFinloader}></div>) || approvedContent.text}
+        </td>
+        <td style={finalizedContent.style} className={styles.buttonStyle} onClick={this.onFinalize.bind(this)}>
+          {(this.state.finalizedLoading && <div className={styles.appFinloader}></div>) || finalizedContent.text}
+        </td>
+      </Fragment>
+    )
+  };
+};
 
-        };
+function finalizeContent(approvalCount, approversCount, finalized, manager) {
+  switch (true) {
+    case finalized:
+      return { text: 'Finalized', style: {} };
+    case manager:
+      return (approvalCount / approversCount) > .5 ?
+        { text: 'Finalize ✍️', style: {} }
+        :
+        { text: "Not enough votes ❌", style: {} };
+    default:
+      return { text: "Can't Finalize ❌", style: {} }
+  };
+}
 
-        this.setState({ ...this.state, approvedLoading: false, approved})
-    };
-
-    async onFinalize() {
-        if (!this.state.isManager || this.state.finalized) return;
-        const { kampaign, web3, id } = this.props;
-        this.setState({ ...this.state, finalizedLoading: true });
-
-        const accounts = await web3.eth.getAccounts();
-        let finalized = false;
-        try {
-            await kampaign.methods.finalizeRequest(id)
-                .send({ from: accounts[0] });
-            finalized = true;
-        } catch(e) {
-
-        };
-
-        this.setState({ ...this.state, finalized, finalizedLoading: false });
-    };
-
-    render() {
-        const {
-            isApprover,
-            isManager,
-            approved,
-            finalized,
-            approvedLoading,
-            finalizedLoading
-        } = this.state
-
-        return [
-            <Table.Cell key={1}>
-                <Button
-                    basic
-                    loading={this.state.approvedLoading}
-                    color={approvedLoading ? 'black' : isApprover ? (approved ? 'grey' : 'green') : 'red'}
-                    onClick={this.onApprove.bind(this)}
-                    style={{
-                        horizontalAlign: 'middle',
-                        display: 'block',
-                        margin: 'auto'
-                    }}
-                >
-                    {isApprover ? (approved ? 'Approved' : 'Approve') : "Can't Approve"}
-                </Button>
-            </Table.Cell>,
-
-            <Table.Cell key={2}>
-                <Button
-                    basic
-                    loading={this.state.finalizedLoading}
-                    color={finalizedLoading ? 'black' : isManager ? (finalized ? 'grey' : 'green') : 'red'}
-                    onClick={this.onFinalize.bind(this)}
-                    style={{
-                        horizontalAlign: 'middle',
-                        display: 'block',
-                        margin: 'auto'
-                    }}
-                >
-                    {isManager ? (finalized ? 'Finalized' : 'Finalize') : "Can't Finalize"}
-                </Button>
-
-            </Table.Cell>
-        ];
-
-    };
+function approveContent(approver, approved, finalized) {
+  switch (true) {
+    case approved:
+      return { text: finalized ? 'Approved' : 'Approved ✅', style: {} };
+    case approver:
+      return { text: finalized ? '-' : 'Approve 🗳', style: {} };
+    default:
+      return { text: finalized ? '-' : "Can't Approve ❌", style: {} };
+  }
 };
 
 export default ApproveFinalizeBtn;

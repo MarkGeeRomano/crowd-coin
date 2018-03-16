@@ -1,4 +1,84 @@
 .container {
-    display: flex;
-    justify-content: center;
+  background-color: white;
+  border-bottom: 1px solid #4b4b4b;
+  height: 65px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
+
+.flexContainer {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.flexContainer a {
+  margin-top: auto;
+}
+
+.flexContainer div {
+  color: var(--linkBlue);
+}
+
+.flexContainer h1 {
+  color: #ffab00;
+  font-size: 36px;
+  font-weight: lighter;
+}
+
+.divider {
+  width: 1px solid #4b4b4b;
+  height: 100%;
+}
+
+.submenuContainer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  font-size: 19px;
+  margin-top: auto;
+}
+
+.submenuItem {
+  border-right: 1px solid #4b4b4b;
+  padding: 0 16px;
+  transition: .25s all ease-out;
+}
+
+.submenuItem:hover {
+  color: var(--linkHoverBlue);
+}
+
+.submenuItemLast {
+  border-right: none;
+  padding-left: 16px;
+  transition: .25s all ease-out;
+}
+
+.submenuItemLast:hover {
+  color: var(--linkHoverBlue);
+}
+
+.github{
+  background-image:  url('/github_icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 17px;
+  width: 17px;
+}
+
+.ether{
+  background-size: contain;
+  background-image:  url('/ether_icon.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+}
+

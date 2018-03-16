@@ -1,115 +1,142 @@
 import React, { Component } from 'react';
-import { Card, Grid, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import campaignGetter from '../../ethereum/Campaign';
 import web3 from '../../ethereum/web3';
+import isRinkeby from './isRinkeby';
+import { Fade } from 'react-reveal';
+
+import styles from '../styles/campaign.css';
 
 import ContributeForm from './ContributeForm';
 
 class Campaign extends Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            mincontribution: '0',
-            balance: '0',
-            requestsCount: '0',
-            approversCount: '0',
-            manager: null,
-            kampaign: null
-        };
+    this.state = {
+      minContribution: '0',
+      balance: '0',
+      requestsCount: '0',
+      approversCount: '0',
+      manager: '',
+      name: '',
+      description: '',
+      campaign: ''
     };
+  };
 
-    async componentDidMount() {
-        this.getSummary()
-    };
+  async componentDidMount() {
+    await this.getCampaign();
+  };
 
-    render() {
-        const { kampaign } = this.state;
+  async getCampaign() {
+    const campaign = await campaignGetter(this.props.id);
+    const campaignMeta = await campaign.methods.getSummary().call();
 
-        return (
-            <div>
-                <h2>Campaign Summary</h2>
-                <Grid>
-                    <Grid.Row>
-                        <Grid.Column width={10}>
-                            <Card.Group items={this.makeCards()} />
-                        </Grid.Column>
-                        <Grid.Column width={6}>
-                            <ContributeForm
-                                kampaign={kampaign}
-                                web3={this.props.web3}
-                                getSummary={this.getSummary.bind(this)}
-                            />
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Link to={`/campaigns/${this.props.id}/requests`}>
-                                <Button primary>View Requests</Button>
-                            </Link>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </div>
-        );
-    };
+    this.setState({
+      minContribution: campaignMeta[0],
+      balance: campaignMeta[1],
+      requestsCount: campaignMeta[2],
+      approversCount: campaignMeta[3],
+      manager: campaignMeta[4],
+      name: campaignMeta[5],
+      description: campaignMeta[6],
+      campaign
+    });
+  };
 
-    async getSummary() {
-        const kampaign = await campaignGetter(this.props.id);
-        const summary = await kampaign.methods.getSummary().call();
+  makeCards() {
+    return this.makeContent().map((item, i) =>
+      <Fade key={item.title}>
+        <div className={styles.card} >
+          <div className={styles.title}>{item.title.toUpperCase()}</div>
+          <div
+            style={item.isDescAdd ? { fontSize: '15px', color: '#18bdc3' } : null}
+            className={styles.value}>
+            {item.value}
+          </div>
+          <div className={styles.description}>{item.description}</div>
+          {item.link}
+        </div>
+      </Fade>
+    );
+  };
 
-        this.setState({
-            mincontribution: summary[0],
-            balance: summary[1],
-            requestsCount: summary[2],
-            approversCount: summary[3],
-            manager: summary[4],
-            kampaign
-        });
-    };
+  render() {
+    return (
+      <div className={styles.container}>
+        <Link to='/'><button>Back To Campaigns</button></Link>
+        <ContributeForm
+          minContribution={this.state.minContribution}
+          campaign={this.state.campaign}
+          web3={this.props.web3}
+          hasAddress={this.props.hasAddress}
+          getCampaign={this.getCampaign.bind(this)}
+        />
+        <div className={styles.summaryContainer}>
+          <h2>Campaign Summary</h2>
+          <div className={styles.cardsContainer}>
+            {this.makeCards()}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
-    makeCards() {
-        const {
-            mincontribution,
-            balance,
-            requestsCount,
-            approversCount,
-            manager,
-        } = this.state;
 
-        return [
-            {
-                style: { overflowWrap: 'break-word' },
-                header: manager,
-                meta: 'Address of manager',
-                description: 'Creator of campaign. Able to create and finalize requests for campaign'
-            },
-            {
-                style: { overflowWrap: 'break-word' },
-                header: web3.utils.fromWei(balance, 'ether'),
-                meta: 'Campaign balance (ether)',
-                description: 'The amount of ether campaign has left to spend'
-            },
-            {
-                style: { overflowWrap: 'break-word' },
-                header: requestsCount,
-                meta: 'Number of requests',
-                description: 'A request attempts to draw from the campaign. Requests must be approved by contributors'
-            },
-            {
-                style: { overflowWrap: 'break-word' },
-                header: approversCount, meta: 'Number of approvers',
-                description: "Number of people who donated to campaign"
-            },
-            {
-                style: { overflowWrap: 'break-word' },
-                header: mincontribution,
-                meta: 'Minimum contribution (wei)',
-                description: 'You must contribute atleast this much wei to become an approver'
-            },
-        ];
-    }
+  makeContent() {
+    const {
+      description,
+      manager,
+      balance,
+      requestsCount,
+      approversCount,
+      minContribution
+    } = this.state;
+
+    return [
+      {
+        title: 'campaign description 📃',
+        value: description,
+        description: '',
+        isDescAdd: true
+      },
+      {
+        title: 'address of manager 👩‍⚖️',
+        value: createUrl(manager),
+        description: "The creator of this campaign. They're able to create and finalize requests for campaign",
+        isDescAdd: true
+      },
+      {
+        title: 'campaign balance 💰',
+        value: Math.round(web3.utils.fromWei(balance, 'ether')) + ' (ETH)',
+        description: 'The amount of ether this campaign has',
+      },
+      {
+        title: 'number of requests 🗃',
+        value: requestsCount,
+        description: 'The number of open requests this campaign has',
+        link:
+          <Link to={`/campaigns/${this.props.id}/requests`}>
+            <button>Go To Requests</button>
+          </Link>,
+      },
+      {
+        title: 'number of approvers ⚖️',
+        value: approversCount,
+        description: 'The number of donators with request voting rights',
+      },
+      {
+        title: 'Min. contribution for vote 💸',
+        value: <div>{this.props.web3.utils.fromWei(minContribution)}<div className='ether-denom-lrg'></div></div>,
+        description: 'The amount needed to contribute to gain voting rights',
+      }
+    ]
+  };
 };
 
-export default Campaign;
+function createUrl(address) {
+  return <a target="_blank" href={'https://rinkeby.etherscan.io/address/' + address}>{address}📫</a>;
+};
+
+export default isRinkeby(Campaign);

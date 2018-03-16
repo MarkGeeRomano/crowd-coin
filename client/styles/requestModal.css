@@ -1,0 +1,56 @@
+.closeButton  {
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  margin-left: 100%;
+}
+
+.container h2 {
+  margin-bottom: 10px;
+}
+
+.container textarea {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.container form > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.container form > div > div:first-child{
+  width: 60%;
+}
+
+.container form > div > div{
+  width: 40%;
+}
+
+.container form > div > div:first-child input{
+  font-size: 14px;
+  width: 100%;
+  padding-left: 5px;
+}
+
+.container form > div > div input{
+  width: 70%;
+}
+.container form button {
+  cursor: pointer;
+  font-size: 14px;
+  height: 2.5em;
+  letter-spacing: 3px;
+  margin-bottom: 7px;
+  width: 100%;
+}
+
+
+
+
+.container label {
+  display:block;
+}
+

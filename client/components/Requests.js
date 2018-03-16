@@ -1,87 +1,185 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Table, Container } from 'semantic-ui-react';
 
 import campaignGetter from '../../ethereum/Campaign';
+import isRinkeby from './isRinkeby';
+import { Fade } from 'react-reveal';
 
+import styles from '../styles/requests.css'
+import Modal from 'react-modal';
 import RequestRow from './RequestRow';
+import RequestModal from './RequestModal';
 
 class Requests extends Component {
-    state = {
-        address: this.props.id,
-        requests: [],
-        requestCount: '',
-        approvers: '',
-        kampaign: null
+
+  state = {
+    loadingReqs: true,
+    modalIsOpen: false,
+    campaign: {},
+    requests: [],
+    approversCount: 0,
+    approved: false,
+    finalized: false,
+    manager: false,
+    approver: false,
+    addingRow: false
+  };
+
+  openModal() {
+    this.setState({ ...this.state, modalIsOpen: true });
+  };
+
+  closeModal() {
+    this.setState({ ...this.state, modalIsOpen: false });
+  };
+
+  makeFirstReq() {
+    this.closeModal();
+    this.addingRow();
+  };
+
+  addingRow() {
+    this.setState({ ...this.state, addingRow: true })
+  };
+
+  turnOffSpinners() {
+    this.setState({ ...this.state, addingRow: false });
+  }
+
+  async doneAddingRow() {
+    const { campaign, requests } = this.state;
+    const newReqNumber = this.state.requests.length;
+
+    const newReq = await campaign.methods.requests(newReqNumber).call();
+    this.setState({ ...this.state, requests: [...requests, newReq], addingRow: false });
+  };
+
+  async componentDidMount() {
+    await this.getRequests();
+  };
+
+  async getRequests() {
+    const { campaignGetter, id, web3 } = this.props
+
+    const campaign = await campaignGetter(id);
+    const accounts = await web3.eth.getAccounts();
+    let requests = [];
+    let manager;
+    let approver;
+    let approversCount;
+    try {
+      const requestsCount = await campaign.methods.requestsLength().call();
+      let request;
+      let approved;
+      for (let i = 0; i < requestsCount; i++) {
+        request = await campaign.methods.requests(i).call();
+        approved = await campaign.methods.approved(i).call({ from: accounts[0] });
+        request = { ...request, approved };
+        requests.push(request);
+      };
+      manager = await campaign.methods.manager().call() == accounts[0];
+      approver = await campaign.methods.approvers(accounts[0]).call();
+      approversCount = await campaign.methods.approversCount().call();
+    } catch (err) {
+      console.log(err);
     };
 
-    async componentDidMount() {
-        this.updateRequestData();
-    };
+    this.setState({
+      ...this.state,
+      requests,
+      manager,
+      approver,
+      campaign,
+      loadingReqs: false,
+      approversCount
+    });
+  };
 
-    async updateRequestData() {
-        const kampaign = await campaignGetter(this.props.id);
-        const approvers = await kampaign.methods.approversCount().call();
-        const requests = [];
-        const requestCount = await kampaign.methods.getRequestsCount().call();
-        for (let i = 0; i < requestCount; i++) {
-            const request = await kampaign.methods.requests(i).call();
-            requests.push(request);
-        };
+  makeRows() {
+    const { requests, approver, manager, campaign } = this.state;
 
-        this.setState({ ...this.state, requests, requestCount, approvers, kampaign });
+    return this.state.requests.map((request, i) =>
+      < RequestRow
+        key={i + request.description}
+        id={i}
+        request={request}
+        manager={manager}
+        approver={approver}
+        campaign={campaign}
+        web3={this.props.web3}
+        approversCount={this.state.approversCount}
+        getRequests={this.getRequests.bind(this)}
+      />
+    )
+  };
 
-    }
 
-    renderRows() {
-        return this.state.requests.map((request, i) => {
-            return <RequestRow
-                key={request.description + i}
-                id={i}
-                request={request}
-                approvers={this.state.approvers}
-                address={this.props.id}
-                web3={this.props.web3}
-                kampaign={this.state.kampaign}
-                updateRequestData={this.updateRequestData.bind(this)}
-            />
-        });
-    };
-
-    render() {
-        const { Header, Row, HeaderCell, Body } = Table;
-        return (
-            <div>
-                <h3>This Campaign's Requests</h3>
-                <Link to={`/campaigns/${this.props.id}`}>Go back to campaign</Link>
-                <Link to={`/campaigns/${this.props.id}/requests/new`}>
-                    <Button
-                        style={{ marginBottom: '10px', float: 'right' }}
-                        primary
-                    >
-                        Create New Request
-                    </Button>
-                </Link>
-                <Table>
-                    <Header>
-                        <Row>
-                            <HeaderCell textAlign='center'>ID</HeaderCell>
-                            <HeaderCell>Description</HeaderCell>
-                            <HeaderCell textAlign='center'>Amount</HeaderCell>
-                            <HeaderCell textAlign='center'>Recipient</HeaderCell>
-                            <HeaderCell textAlign='center'>Approval Count</HeaderCell>
-                            <HeaderCell textAlign='center'>Approve</HeaderCell>
-                            <HeaderCell textAlign='center'>Finalize</HeaderCell>
-                        </Row>
-                    </Header>
-                    <Body>
-                        {this.renderRows()}
-                    </Body>
-                </Table>
-
-            </div>
-        );
-    };
+  render() {
+    return (
+      <div className={styles.container}>
+        <div className={styles.headerContainer}>
+          <Link to={`/campaigns/${this.props.id}`}>
+            <button>Go back to campaign</button>
+          </Link>
+          {this.state.manager && <button onClick={this.openModal.bind(this)}>Create New Request ✏️</button>}
+        </div>
+        <div className={styles.tableContainer}>
+          {this.state.requests.length || this.state.addingRow ?
+            <Fade>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Recipient</th>
+                    <th>Approvals</th>
+                    <th>Approve</th>
+                    <th>Finalize</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.makeRows()}
+                  {this.state.addingRow &&
+                    <Fade bottom>
+                      <tr>
+                        <td><div className={styles.loader}></div></td>
+                        <td><div className={styles.loader}></div></td>
+                        <td><div className={styles.loader}></div></td>
+                        <td><div className={styles.loader}></div></td>
+                        <td><div className={styles.loader}></div></td>
+                        <td><div className={styles.loader}></div></td>
+                        <td><div className={styles.loader}></div></td>
+                      </tr>
+                    </Fade>}
+                </tbody>
+              </table>
+            </Fade>
+            : this.state.loadingReqs ?
+              <div style={{ marginTop: '20px' }}>loading requests....</div>
+              :
+              <div style={{ marginTop: '20px' }}>
+                No requests yet
+                                {this.state.manager &&
+                  <span> ....but since you're the manager, you can
+                                        <a onClick={this.openModal.bind(this)}> make one 😏</a>
+                  </span>}
+              </div>}
+        </div>
+        <RequestModal
+          modalIsOpen={this.state.modalIsOpen}
+          closeModal={this.closeModal.bind(this)}
+          openModal={this.openModal.bind(this)}
+          campaignGetter={this.props.campaignGetter}
+          id={this.props.id}
+          web3={this.props.web3}
+          addingRow={this.addingRow.bind(this)}
+          doneAddingRow={this.doneAddingRow.bind(this)}
+          turnOffSpinners={this.turnOffSpinners.bind(this)}
+        />
+      </div>
+    );
+  };
 };
 
-export default Requests;
+export default isRinkeby(Requests);

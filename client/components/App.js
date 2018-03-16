@@ -1,83 +1,98 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect, Link, BrowserRouter, withRouter, Router } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
+import campaignGetter from '../../ethereum/Campaign';
 
-// import Home from './Home';
-// import Header from './Header';
-// import Campaign from './Campaign';
-import NewCampaign from './NewCampaign';
+import Home from './Home';
+import Header from './Header';
+import Campaign from './Campaign';
 import Requests from './Requests';
-import NewRequest from './NewRequest';
-
-import Home from './Home2'
-import Header from './Header2'
-import Campaign from './Campaign2'
+import About from './About';
 
 class App extends Component {
-    state = { campaigns: [] };
+  state = {
+    rinkeby: true,
+    hasAddress: true
+  };
 
-    async componentDidMount() {
-        this.getCampaigns();
-    };
+  async componentDidMount() {
+    const rinkeby = await web3.eth.net.getNetworkType() === 'rinkeby' ? true : false;
+    const addresses = await web3.eth.getAccounts();
+    const hasAddress = !!addresses[0];
 
-    async getCampaigns() {
-        const campaigns = await factory.methods.getDeployedCampaigns().call();
-        this.setState({ campaigns });
-    };
+    this.setState({ rinkeby, hasAddress });
+  };
 
-    render() {
-        return (
-                <div>
-                <Header />
-                <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => <Home {...this.props} campaigns={this.state.campaigns} />}
-                    />
-                    <Route
-                        path="/new-campaign"
-                        render={(history) => <NewCampaign {...{
-                            ...this.props,
-                            factory,
-                            web3,
-                            getCampaigns: this.getCampaigns.bind(this),
-                            campaigns: this.state.campaigns
-                        }} />}
-                    />
-                    <Route
-                        exact
-                        path="/campaigns/:id"
-                        render={({ match: { params } }) => <Campaign {...{
-                            ...this.props,
-                            ...params,
-                            web3
-                        }} />}
-                    />
-                    <Route
-                        exact
-                        path="/campaigns/:id/requests"
-                        render={({ match: { params } }) => <Requests {...{
-                            ...this.props,
-                            ...params,
-                            web3
-                        }} />}
-                    />
-                    <Route
-                        path="/campaigns/:id/requests/new"
-                        render={({ match: { params } }) => <NewRequest {...{
-                            ...this.props,
-                            ...params,
-                            web3
-                        }} />}
-                    />
-                    <Route render={()=><h3>404 nothing here</h3>}/>
-                </Switch>
-            </div>
-        );
-    };
+  render() {
+    return (
+      <div>
+        <Header />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={({ match }) => <Home {...{
+              ...this.props,
+              factory,
+              web3,
+              rinkeby: this.state.rinkeby,
+              hasAddress: this.state.hasAddress,
+              match,
+              campaignGetter
+            }} />}
+          />
+          <Route
+            exact
+            path="/new-campaign"
+            render={({ match: { path } }) => <Home {...{
+              ...this.props,
+              factory,
+              web3,
+              rinkeby: this.state.rinkeby,
+              hasAddress: this.state.hasAddress,
+              path,
+              campaignGetter
+            }} />}
+          />
+          <Route
+            exact
+            path="/campaigns/:id"
+            render={({ match: { params } }) => <Campaign {...{
+              ...this.props,
+              ...params,
+              web3,
+              rinkeby: this.state.rinkeby,
+              hasAddress: this.state.hasAddress
+            }} />}
+          />
+          <Route
+            exact
+            path="/campaigns/:id/requests"
+            render={({ match: { params } }) => <Requests {...{
+              ...this.props,
+              ...params,
+              web3,
+              campaignGetter,
+              rinkeby: this.state.rinkeby
+            }} />}
+          />
+          <Route path='/about' component={About} />
+          <Route
+            path='/rinkeby'
+            render={() =>
+              !this.state.rinkeby ?
+                <div style={{ margin: '50px' }}>You're not on the Rinkeby network. Please switch to view the site!</div>
+                :
+                <Redirect to='/' />
+            }
+          />
+          <Route render={() => <div style={{ margin: '50px' }}>404 nothing here homie</div>} />
+        </Switch>
+      </div>
+    );
+  };
 };
 
 export default withRouter(App);
