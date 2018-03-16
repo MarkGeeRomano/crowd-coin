@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../styles/ContributeForm.css'
+import styles from '../styles/contributeForm.css'
 import campaignGetter from '../../ethereum/Campaign';
 
 class ContributeForm extends Component {
