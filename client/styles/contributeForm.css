@@ -42,6 +42,7 @@
   border: .5px solid var(--boxGrey);
   border-radius: calc(var(--myBoxRadius) - 5px);
   cursor: pointer;
+  z-index: 1;
 }
 
 .frameTop {
