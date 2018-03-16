@@ -1,5 +1,5 @@
 node_modules
 .DS_Store
-ethereum/deploy.js
+ethereum/mnemonic.js
 .vscode
 test.js
