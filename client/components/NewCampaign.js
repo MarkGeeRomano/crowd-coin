@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Fade, SpecialFade } from 'react-reveal';
 import factory from '../../ethereum/factory';
-console.log(`specialFade:`,SpecialFade)
+console.log(Fade)
 import styles from '../styles/newCampaign.css'
 
 class NewCampaign extends Component {
