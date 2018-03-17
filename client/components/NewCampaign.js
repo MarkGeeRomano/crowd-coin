@@ -65,64 +65,65 @@ class NewCampaign extends Component {
 
   render() {
     return (
-      <Fade duration={1500}>
-        <div className={styles.container}>
-          <div className={this.props.path === '/new-campaign' ? styles.blink : null}>
-            <div>
-              <h3>Create a Campaign 📮</h3>
-              <form autoComplete='off' onSubmit={this.onSubmit.bind(this)}>
-                <div className={styles.fieldContainer}>
-                  <div className={styles.inputContainer}>
-                    <div>
-                      <label htmlFor='name'>Name of campaign</label>
-                      <br />
-                      <input
-                        value={this.state.name}
-                        className={styles.name}
-                        id='name'
-                        onChange={this.onChangeName.bind(this)}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.inputContainer}>
-                    <div>
-                      <label htmlFor='min-contribution'>Min. Contribution</label>
-                      <div className='ether-denom'></div>
-                      <br />
-                      <input
-                        value={this.state.minimum}
-                        id='min-contribution'
-                        onChange={this.onChangeContribution.bind(this)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor='description'>Description of campaign</label>
-                  <textarea
-                    value={this.state.description}
-                    rows='4'
-                    id='description'
-                    onChange={this.onChangeDescription.bind(this)}
-                  />
-                </div>
-                <button >{this.state.loading ? <div className={styles.loader}></div> : 'Create Campaign'}</button>
-                {this.state.msg &&
-                  <div className={this.state.error ? 'msgBox error' : 'msgBox success'}>
-                    {this.state.msg}
-                  </div>}
-              </form>
-            </div>
-            {!this.props.hasAddress &&
-              <SpecialFade duration={1500}>
-                <div className='mask'>
-                  <p>You need to either login to Metamask or <a target="_blank" href='https://metamask.io/'>install</a> it to create a campaign 🦊</p>
-                </div>
-              </SpecialFade>
-            }
-          </div>
-        </div>
-      </Fade>
+      // <Fade duration={1500}>
+      //   <div className={styles.container}>
+      //     <div className={this.props.path === '/new-campaign' ? styles.blink : null}>
+      //       <div>
+      //         <h3>Create a Campaign 📮</h3>
+      //         <form autoComplete='off' onSubmit={this.onSubmit.bind(this)}>
+      //           <div className={styles.fieldContainer}>
+      //             <div className={styles.inputContainer}>
+      //               <div>
+      //                 <label htmlFor='name'>Name of campaign</label>
+      //                 <br />
+      //                 <input
+      //                   value={this.state.name}
+      //                   className={styles.name}
+      //                   id='name'
+      //                   onChange={this.onChangeName.bind(this)}
+      //                 />
+      //               </div>
+      //             </div>
+      //             <div className={styles.inputContainer}>
+      //               <div>
+      //                 <label htmlFor='min-contribution'>Min. Contribution</label>
+      //                 <div className='ether-denom'></div>
+      //                 <br />
+      //                 <input
+      //                   value={this.state.minimum}
+      //                   id='min-contribution'
+      //                   onChange={this.onChangeContribution.bind(this)}
+      //                 />
+      //               </div>
+      //             </div>
+      //           </div>
+      //           <div>
+      //             <label htmlFor='description'>Description of campaign</label>
+      //             <textarea
+      //               value={this.state.description}
+      //               rows='4'
+      //               id='description'
+      //               onChange={this.onChangeDescription.bind(this)}
+      //             />
+      //           </div>
+      //           <button >{this.state.loading ? <div className={styles.loader}></div> : 'Create Campaign'}</button>
+      //           {this.state.msg &&
+      //             <div className={this.state.error ? 'msgBox error' : 'msgBox success'}>
+      //               {this.state.msg}
+      //             </div>}
+      //         </form>
+      //       </div>
+      //       {!this.props.hasAddress &&
+      //         <SpecialFade duration={1500}>
+      //           <div className='mask'>
+      //             <p>You need to either login to Metamask or <a target="_blank" href='https://metamask.io/'>install</a> it to create a campaign 🦊</p>
+      //           </div>
+      //         </SpecialFade>
+      //       }
+      //     </div>
+      //   </div>
+      // </Fade>
+      <div></div>
     );
   };
 
