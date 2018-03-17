@@ -11,14 +11,30 @@
       div{
         height: 100vh;
         width: 100vw;
+        display: flex;
+        justify-content: center;
       }
-      div .meme {
+      div > .meme {
         background-image: url('had_to_do_it_to_em.jpg');
         background-size: contain;
         background-repeat: no-repeat;
         display: inline-block;
+        margin: auto;
         height: 100%;
-        width: 100%;
+        width: 50%;
+      }
+
+      @media (orientation: portrait) {
+        div {
+          flex-direction: column;
+          justify-content: flex-start;
+          height: 75vh;
+        }
+
+        div > .meme {
+          height: 75%;
+          width: 100%;
+        }
       }
     </style>
   </head>
