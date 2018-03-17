@@ -69,14 +69,14 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <NewCampaign {...{
+          {/* <NewCampaign {...{
             factory,
             web3,
             getCampaigns,
             hasAddress,
             path,
             getCampaigns: this.getCampaigns.bind(this)
-          }} />
+          }} /> */}
         </div>
       </div>
     );

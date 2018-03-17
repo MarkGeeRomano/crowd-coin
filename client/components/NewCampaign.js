@@ -16,7 +16,6 @@ class NewCampaign extends Component {
   };
 
   async onSubmit(e) {
-    console.log('new campaign onsubmit')
     e.preventDefault();
     let {
       name,
@@ -128,19 +127,16 @@ class NewCampaign extends Component {
   };
 
   onChangeName(e) {
-    console.log(`new campaign onchangename`)
     e.preventDefault();
     this.setState({ ...this.state, name: e.target.value });
   };
 
   onChangeContribution(e) {
-    console.log(`new campaign onChangeContribution`)
     e.preventDefault();
     this.setState({ ...this.state, minimum: e.target.value });
   };
 
   onChangeDescription(e) {
-    console.log(`new campaign onChangeDescription`)
     e.preventDefault();
     this.setState({ ...this.state, description: e.target.value });
   };
