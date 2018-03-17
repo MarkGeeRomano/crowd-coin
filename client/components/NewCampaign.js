@@ -15,53 +15,53 @@ class NewCampaign extends Component {
     loading: false
   };
 
-  async onSubmit(e) {
-    e.preventDefault();
-    let {
-      name,
-      minimum,
-      description,
-      error,
-      msg
-    } = this.state;
+  // async onSubmit(e) {
+  //   e.preventDefault();
+  //   let {
+  //     name,
+  //     minimum,
+  //     description,
+  //     error,
+  //     msg
+  //   } = this.state;
 
-    error = false;
-    msg = '';
+  //   error = false;
+  //   msg = '';
 
-    this.setState({ ...this.state, loading: true, msg, error })
-    try {
-      const invalid = (validateDesc(description) || validateMin(minimum) || validateName(name));
-      if (invalid) { throw invalid; };
+  //   this.setState({ ...this.state, loading: true, msg, error })
+  //   try {
+  //     const invalid = (validateDesc(description) || validateMin(minimum) || validateName(name));
+  //     if (invalid) { throw invalid; };
 
-      const accounts = await this.props.web3.eth.getAccounts();
-      await factory.methods.createCampaign(
-        this.props.web3.utils.toWei(minimum, 'ether'),
-        name,
-        description
-      ).send({ from: accounts[0] });
+  //     const accounts = await this.props.web3.eth.getAccounts();
+  //     await factory.methods.createCampaign(
+  //       this.props.web3.utils.toWei(minimum, 'ether'),
+  //       name,
+  //       description
+  //     ).send({ from: accounts[0] });
 
-      minimum = '';
-      name = '';
-      description = '';
-      msg = 'Successfully created campaign!';
-      error: false;
-      this.props.getCampaigns();
-    } catch (err) {
-      console.log(`err`,err)
-      error = true;
-      msg = err.message.length > 500 ? 'Rejected transaction!' : err.message;
-    };
+  //     minimum = '';
+  //     name = '';
+  //     description = '';
+  //     msg = 'Successfully created campaign!';
+  //     error: false;
+  //     this.props.getCampaigns();
+  //   } catch (err) {
+  //     console.log(`err`,err)
+  //     error = true;
+  //     msg = err.message.length > 500 ? 'Rejected transaction!' : err.message;
+  //   };
 
-    this.setState({
-      ...this.state,
-      loading: false,
-      name,
-      minimum,
-      description,
-      error,
-      msg
-    });
-  };
+  //   this.setState({
+  //     ...this.state,
+  //     loading: false,
+  //     name,
+  //     minimum,
+  //     description,
+  //     error,
+  //     msg
+  //   });
+  // };
 
   render() {
     return (
@@ -126,20 +126,20 @@ class NewCampaign extends Component {
     );
   };
 
-  onChangeName(e) {
-    e.preventDefault();
-    this.setState({ ...this.state, name: e.target.value });
-  };
+  // onChangeName(e) {
+  //   e.preventDefault();
+  //   this.setState({ ...this.state, name: e.target.value });
+  // };
 
-  onChangeContribution(e) {
-    e.preventDefault();
-    this.setState({ ...this.state, minimum: e.target.value });
-  };
+  // onChangeContribution(e) {
+  //   e.preventDefault();
+  //   this.setState({ ...this.state, minimum: e.target.value });
+  // };
 
-  onChangeDescription(e) {
-    e.preventDefault();
-    this.setState({ ...this.state, description: e.target.value });
-  };
+  // onChangeDescription(e) {
+  //   e.preventDefault();
+  //   this.setState({ ...this.state, description: e.target.value });
+  // };
 };
 
 function validateName(name) {
