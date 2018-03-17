@@ -4,6 +4,7 @@ import isRinkeby from './isRinkeby';
 import { Fade } from 'react-reveal';
 
 import NewCampaign from './NewCampaign';
+console.log(`NewCampaign`,NewCampaign)
 import styles from '../styles/home.css';
 
 class Home extends Component {
