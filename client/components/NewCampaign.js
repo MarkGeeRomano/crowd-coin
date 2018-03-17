@@ -126,20 +126,20 @@ class NewCampaign extends Component {
     );
   };
 
-  // onChangeName(e) {
-  //   e.preventDefault();
-  //   this.setState({ ...this.state, name: e.target.value });
-  // };
+  onChangeName(e) {
+    e.preventDefault();
+    this.setState({ ...this.state, name: e.target.value });
+  };
 
-  // onChangeContribution(e) {
-  //   e.preventDefault();
-  //   this.setState({ ...this.state, minimum: e.target.value });
-  // };
+  onChangeContribution(e) {
+    e.preventDefault();
+    this.setState({ ...this.state, minimum: e.target.value });
+  };
 
-  // onChangeDescription(e) {
-  //   e.preventDefault();
-  //   this.setState({ ...this.state, description: e.target.value });
-  // };
+  onChangeDescription(e) {
+    e.preventDefault();
+    this.setState({ ...this.state, description: e.target.value });
+  };
 };
 
 function validateName(name) {
