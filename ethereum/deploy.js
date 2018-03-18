@@ -3,7 +3,7 @@ const Web3 = require('web3');
 const { interface, bytecode } = require('./build/CampaignFactory');
 const mnemonic = require('./mnemonic')
 
-const provider = new hdWalletProvider(mnemonic, ' https://rinkeby.infura.io/dI1KXaB7EJkjyWstyu2a');
+const provider = new hdWalletProvider(mnemonic, 'https://rinkeby.infura.io/dI1KXaB7EJkjyWstyu2a');
 
 const web3 = new Web3(provider);
 
