@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.20;
 
 contract CampaignFactory {
     address[] public deployedCampaigns;
@@ -54,11 +54,11 @@ contract Campaign {
 
     function createRequest(string description, uint value, address recipient) public restricted {
         Request memory request = Request({
-           description: description,
-           value: value,
-           recipient: recipient,
-           complete: false,
-           approvalCount: 0
+            description: description,
+            value: value,
+            recipient: recipient,
+            complete: false,
+            approvalCount: 0
         });
 
         requests.push(request);

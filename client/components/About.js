@@ -29,7 +29,7 @@ Anyone with a bit of Rinkeby ether can deploy a campaign. Once the campaign is d
         <p>
           I’m always refactoring and adding/removing functionality to the contract. When I do, I redeploy the factory contract, which in turn “wipes” the campaigns from the application. They’ll still be on the blockchain, just not this app. So don’t get too attached to any campaigns 😹.
             </p>
-        <p>You can view the verified contract code here 👉 </p>
+        <p>You can view the verified contract code here 👉 <a target="_blank" href='https://rinkeby.etherscan.io/address/0x22106c92DeA310A89b86304AC8fa60312362cc4d#code'>Etherscan</a></p>
         <p>You can checkout the repo for this app here 👉 <a target="_blank" href='https://github.com/MarkGeeRomano/crowd-coin'>Github</a></p>
         <p>Question? Comment? Wanna troll me ?  👉 markgromano31@gmail.com</p>
       </div>
