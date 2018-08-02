@@ -1,6 +1,6 @@
 ## Crowd Coin
 
-This codebase is what powers [Crowd-Coin](http://www.ccrowd-ccoin.herokuapp.com).
+This codebase is what powers [Crowd-Coin](ccrowd-ccoin.herokuapp.com).
 
 It's a React app that originally included Redux, but found as I developed it, there was little need to maintain a global state, largely thanks to MetaMask, which manages the users public/private key pairs, and works to offload authentication.
 
